@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.ctdn = Countdown_create("Melbourne!", 2017, 05, 7, 23, 35);
+    self.ctdn = Countdown_create("Title", 2017, 05, 7, 23, 35);
     
     self.countdownLabel.stringValue = @"";
     [NSTimer scheduledTimerWithTimeInterval:1.0f
