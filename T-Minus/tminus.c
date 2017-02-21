@@ -22,8 +22,22 @@ Countdown* Countdown_create(char *title, int year, int month, int day, int hour,
     t.tm_isdst = -1;
     deadline = mktime(&t);
     
+    return Countdown_createWithTimestamp(title, deadline);
+}
+
+Countdown* Countdown_createWithTimestamp(char *title, time_t deadline)
+{
+    printf("Creating countdown with deadline: %ld", deadline);
+    
     Countdown *ctdn = malloc(sizeof(Countdown));
-    ctdn->deadline = deadline;
+    
+    time_t now = time(NULL);
+    if (deadline < now) {
+        ctdn->deadline = now;
+    } else {
+        ctdn->deadline = deadline;
+    }
+    
     strncpy(ctdn->title, title, MAX_TITLE-1);
     
     return ctdn;
@@ -36,20 +50,25 @@ Tminus* Countdown_tminus(Countdown *countdown)
 
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
 {
-    long diff = difftime(countdown->deadline, currentTime);
-    
-    int SECONDS_IN_DAY = 60 * 60 * 24;
-    long rem = (long) diff % (long) SECONDS_IN_DAY;
-    int hours = round(rem / 60 / 60);
-    rem = rem % (60*60);
-    int minutes = round(rem/60);
-    int seconds = rem % 60;
-    int days = round(diff / SECONDS_IN_DAY);
-    
     Tminus *tminus = malloc(sizeof(Tminus));
-    tminus->difference = diff;
     
-    sprintf(tminus->description, "%d days %d:%d:%d", days, hours, minutes, seconds);
+    long diff = difftime(countdown->deadline, currentTime);
+    if (diff <= 0) {
+        tminus->difference = 0;
+        sprintf(tminus->description, "Hope its not too late!");
+    } else {
+        long rem = (long) diff % (long) SECONDS_IN_DAY;
+        int hours = round(rem / 60 / 60);
+        rem = rem % (60*60);
+        int minutes = round(rem/60);
+        int seconds = rem % 60;
+        int days = round(diff / SECONDS_IN_DAY);
+        
+        tminus->difference = diff;
+        
+        sprintf(tminus->description, "%d days %d:%d:%d", days, hours, minutes, seconds);
+    }
+    
     
     return tminus;
 }

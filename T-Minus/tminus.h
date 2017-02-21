@@ -17,6 +17,8 @@
 
 #define MAX_TITLE 256
 #define MAX_DESCRIPTION 100
+#define SECONDS_IN_DAY 86400
+#define SECONDS_IN_YEAR 31536000
 
 typedef struct Countdown {
     time_t deadline;
@@ -29,6 +31,8 @@ typedef struct Tminus {
 } Tminus;
 
 Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute);
+Countdown* Countdown_createWithTimestamp(char *title, time_t deadline);
+
 Tminus* Countdown_tminus(Countdown *countdown);
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);
 
