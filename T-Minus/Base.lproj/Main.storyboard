@@ -690,7 +690,7 @@
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eeU-nW-dZl">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="background" id="h60-YJ-ZkI"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="h60-YJ-ZkI"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UOF-kK-zsZ">
                                 <rect key="frame" x="238" y="105" width="4" height="60"/>
@@ -711,6 +711,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="eeU-nW-dZl" id="8UE-Je-rBk"/>
                         <outlet property="countdownLabel" destination="6fE-9h-RLC" id="ZkZ-8O-eW8"/>
                     </connections>
                 </viewController>
@@ -719,7 +720,4 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="background" width="288" height="162"/>
-    </resources>
 </document>

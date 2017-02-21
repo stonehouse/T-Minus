@@ -66,7 +66,7 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
         
         tminus->difference = diff;
         
-        sprintf(tminus->description, "%d days %d:%d:%d", days, hours, minutes, seconds);
+        sprintf(tminus->description, "%d Days %d:%d:%d", days, hours, minutes, seconds);
     }
     
     

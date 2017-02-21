@@ -15,7 +15,6 @@
 		FA6A228B1E59F317005FCFF1 /* T_MinusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A228A1E59F317005FCFF1 /* T_MinusTests.m */; };
 		FA6A22961E59F317005FCFF1 /* T_MinusUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22951E59F317005FCFF1 /* T_MinusUITests.m */; };
 		FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22A41E59F3E7005FCFF1 /* tminus.c */; };
-		FA6A22AA1E5A2F62005FCFF1 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FA6A22A91E5A2F62005FCFF1 /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +52,6 @@
 		FA6A22971E59F317005FCFF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA6A22A41E59F3E7005FCFF1 /* tminus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tminus.c; sourceTree = "<group>"; };
 		FA6A22A51E59F3E7005FCFF1 /* tminus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tminus.h; sourceTree = "<group>"; };
-		FA6A22A91E5A2F62005FCFF1 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +118,6 @@
 		FA6A22761E59F317005FCFF1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA6A22A91E5A2F62005FCFF1 /* background.jpg */,
 				FA6A22771E59F317005FCFF1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -259,7 +256,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6A22AA1E5A2F62005FCFF1 /* background.jpg in Resources */,
 				FA6A227D1E59F317005FCFF1 /* Assets.xcassets in Resources */,
 				FA6A22801E59F317005FCFF1 /* Main.storyboard in Resources */,
 			);
@@ -516,6 +512,7 @@
 				FA6A229C1E59F317005FCFF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA6A229D1E59F317005FCFF1 /* Build configuration list for PBXNativeTarget "T-MinusTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +521,7 @@
 				FA6A229F1E59F317005FCFF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA6A22A01E59F317005FCFF1 /* Build configuration list for PBXNativeTarget "T-MinusUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +530,7 @@
 				FA6A22A21E59F317005FCFF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

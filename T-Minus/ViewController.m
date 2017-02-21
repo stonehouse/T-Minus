@@ -11,6 +11,7 @@
 
 @interface ViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
+@property (weak) IBOutlet NSImageView *backgroundView;
 @property (nonatomic) Countdown *ctdn;
 @end
 
@@ -20,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.countdownLabel.textColor = [NSColor blackColor];
 }
 
 - (void)viewDidAppear
@@ -59,7 +61,42 @@
     alert.accessoryView = input;
     
     [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        [self askAboutBackground];
         [self setupCountdown:input.dateValue.timeIntervalSince1970];
+    }];
+}
+
+- (void)askAboutBackground
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    
+    [alert setMessageText:@"Do you what to pick a background?"];
+    [alert setInformativeText:NSLocalizedString(@"You can pick a custom background for your countdown if you like.", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+    [alert setAlertStyle:NSAlertStyleInformational];
+    
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == 1000) {
+            [self showBackgroundSelect];
+        }
+    }];
+}
+
+- (void)showBackgroundSelect
+{
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setCanChooseFiles:YES];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+    [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL *bgURL = panel.URLs.firstObject;
+            if (bgURL) {
+                self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
+                self.countdownLabel.textColor = [NSColor whiteColor];
+            }
+        }
     }];
 }
 
@@ -70,12 +107,5 @@
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
-}
-
 
 @end
