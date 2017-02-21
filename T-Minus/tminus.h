@@ -16,13 +16,24 @@
 #include <math.h>
 
 #define MAX_TITLE 256
+#define MAX_DESCRIPTION 100
 
-typedef time_t Countdown;
+typedef struct Countdown {
+    time_t deadline;
+    char title[MAX_TITLE];
+} Countdown;
 
-Countdown Countdown_create(int year, int month, int day, int hour, int minute);
-void Countdown_destroy(Countdown countdown);
-char *Countdown_toString(Countdown countdown);
-char *Countdown_toStringRelativeToCurrentTime(Countdown countdown, time_t currentTime);
+typedef struct Tminus {
+    time_t difference;
+    char description[MAX_DESCRIPTION];
+} Tminus;
+
+Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute);
+Tminus* Countdown_tminus(Countdown *countdown);
+Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);
+
+void Countdown_destroy(Countdown *countdown);
+void Tminus_destroy(Tminus *tminus);
 
 
 #endif /* tminus_h */

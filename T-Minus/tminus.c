@@ -9,7 +9,7 @@
 #include "tminus.h"
 
 
-Countdown Countdown_create(int year, int month, int day, int hour, int minute)
+Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute)
 {
     struct tm t;
     time_t deadline;
@@ -21,22 +21,22 @@ Countdown Countdown_create(int year, int month, int day, int hour, int minute)
     t.tm_sec = 0;
     t.tm_isdst = -1;
     deadline = mktime(&t);
-    return deadline;
+    
+    Countdown *ctdn = malloc(sizeof(Countdown));
+    ctdn->deadline = deadline;
+    strncpy(ctdn->title, title, MAX_TITLE-1);
+    
+    return ctdn;
 }
 
-void Countdown_destroy(Countdown countdown)
+Tminus* Countdown_tminus(Countdown *countdown)
 {
-    // Don't do anything yet
+    return Countdown_tminusRelative(countdown, time(NULL));
 }
 
-char *Countdown_toString(Countdown countdown)
+Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
 {
-    return Countdown_toStringRelativeToCurrentTime(countdown, time(NULL));
-}
-
-char *Countdown_toStringRelativeToCurrentTime(Countdown countdown, time_t currentTime)
-{
-    long diff = difftime(countdown, currentTime);
+    long diff = difftime(countdown->deadline, currentTime);
     
     int SECONDS_IN_DAY = 60 * 60 * 24;
     long rem = (long) diff % (long) SECONDS_IN_DAY;
@@ -46,7 +46,22 @@ char *Countdown_toStringRelativeToCurrentTime(Countdown countdown, time_t curren
     int seconds = rem % 60;
     int days = round(diff / SECONDS_IN_DAY);
     
-    char *str = malloc(32*sizeof(char));
-    sprintf(str, "%d days %d:%d:%d", days, hours, minutes, seconds);
-    return str;
+    Tminus *tminus = malloc(sizeof(Tminus));
+    tminus->difference = diff;
+    
+    sprintf(tminus->description, "%d days %d:%d:%d", days, hours, minutes, seconds);
+    
+    return tminus;
 }
+
+
+void Countdown_destroy(Countdown *countdown)
+{
+    free(countdown);
+}
+
+void Tminus_destroy(Tminus *tminus)
+{
+    free(tminus);
+}
+

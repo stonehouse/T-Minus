@@ -11,6 +11,7 @@
 
 @interface ViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
+@property (nonatomic) Countdown *ctdn;
 @end
 
 @implementation ViewController
@@ -19,27 +20,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.ctdn = Countdown_create("Melbourne!", 2017, 05, 7, 23, 35);
+    
     self.countdownLabel.stringValue = @"";
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
     
 }
 
-
-- (void)viewWillAppear {
-    
-}
-
-- (void)viewWillDisappear {
-    
+- (void)dealloc
+{
+    Countdown_destroy(self.ctdn);
 }
 
 - (void)updateTimer {
-    Countdown ctdn = Countdown_create(2017, 05, 7, 23, 35);
-    char *str = Countdown_toString(ctdn);
-    self.countdownLabel.stringValue = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
+    Tminus *tm = Countdown_tminus(self.ctdn);
     
-    Countdown_destroy(ctdn);
+    self.countdownLabel.stringValue = [NSString stringWithCString:tm->description encoding:NSASCIIStringEncoding];
+    
+    Tminus_destroy(tm);
 }
 
 - (void)setRepresentedObject:(id)representedObject {
