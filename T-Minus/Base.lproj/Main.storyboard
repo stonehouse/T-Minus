@@ -678,7 +678,34 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="181" y="336"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1tR-RM-iyb">
+            <objects>
+                <viewController id="jXk-Ah-Wb6" sceneMemberID="viewController">
+                    <view key="view" id="ix1-8i-0CQ">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hGm-1O-Oq9">
+                                <rect key="frame" x="200" y="121" width="81" height="30"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MEOW" id="87d-5w-qZt">
+                                    <font key="font" metaFont="system" size="25"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hGm-1O-Oq9" firstAttribute="centerX" secondItem="ix1-8i-0CQ" secondAttribute="centerX" id="TvX-dT-6QF"/>
+                            <constraint firstItem="hGm-1O-Oq9" firstAttribute="centerY" secondItem="ix1-8i-0CQ" secondAttribute="centerY" id="i7y-3h-elf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="KHT-jN-sx3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1352" y="250"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -717,7 +744,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="81" y="761"/>
         </scene>
     </scenes>
 </document>
