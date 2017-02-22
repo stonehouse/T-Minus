@@ -8,6 +8,79 @@
 
 #include "tminus.h"
 
+void Database_load(Connection *conn)
+{
+    fread(conn->db, sizeof(Database), 1, conn->file);
+}
+
+void Database_close(Connection *conn)
+{
+    if (conn) {
+        if (conn->file) {
+            fclose(conn->file);
+        }
+        if(conn->db) {
+            free(conn->db);
+        }
+        free(conn);
+    }
+}
+
+void Database_write(Connection *conn)
+{
+    rewind(conn->file);
+    
+    size_t rc = fwrite(conn->db, sizeof(Database), 1, conn->file);
+    
+    if (rc != 1) printf("Error writing to db %ld", rc);
+    
+    rc = fflush(conn->file);
+    
+    if (rc == -1) printf("Error flushing db %ld", rc);
+}
+
+void Database_create(Connection *conn)
+{
+    int i = 0;
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        Countdown ctdn = { .deadline = 0, .title = "" };
+        
+        conn->db->rows[i] = ctdn;
+    }
+}
+
+Connection* Database_open(const char *filename)
+{
+    Connection *conn = malloc(sizeof(Connection));
+    
+    conn->db = malloc(sizeof(Database));
+    
+    FILE *file = fopen(filename, "r+");
+    if (file) {
+        // Loaded existing file
+        conn->file = file;
+        if (conn->file) {
+            Database_load(conn);
+        }
+    } else {
+        // New DB file
+        conn->file = fopen(filename, "w");
+        Database_create(conn);
+    }
+    
+    return conn;
+}
+
+void Countdown_save(Connection *conn, Countdown *ctdn)
+{
+    Countdown dbRow = conn->db->rows[0];
+    
+    dbRow.deadline = ctdn->deadline;
+    strncpy(dbRow.title, ctdn->title, MAX_TITLE-1);
+    
+    Database_write(conn);
+}
 
 Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute)
 {

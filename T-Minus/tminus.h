@@ -15,6 +15,7 @@
 #include <string.h>
 #include <math.h>
 
+#define MAX_ROWS 10
 #define MAX_TITLE 256
 #define MAX_DESCRIPTION 100
 #define SECONDS_IN_DAY 86400
@@ -29,6 +30,19 @@ typedef struct Tminus {
     time_t difference;
     char description[MAX_DESCRIPTION];
 } Tminus;
+
+typedef struct Database {
+    Countdown rows[MAX_ROWS];
+} Database;
+
+typedef struct Connection {
+    FILE *file;
+    Database *db;
+} Connection;
+
+Connection* Database_open(const char *filename);
+void Database_close(Connection *conn);
+void Countdown_save(Connection *conn, Countdown *ctdn);
 
 Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute);
 Countdown* Countdown_createWithTimestamp(char *title, time_t deadline);

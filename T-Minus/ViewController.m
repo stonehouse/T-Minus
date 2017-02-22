@@ -13,6 +13,8 @@
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSImageView *backgroundView;
 @property (nonatomic) Countdown *ctdn;
+@property (nonatomic) Connection *connection;
+@property (nonatomic, strong) NSString *documentsPath;
 @end
 
 @implementation ViewController
@@ -22,17 +24,27 @@
     [super viewDidLoad];
     
     self.countdownLabel.textColor = [NSColor blackColor];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    self.documentsPath = [paths objectAtIndex:0];
+    NSString *db = [self.documentsPath stringByAppendingString:@"/tminus.db"];
+    
+    self.connection = Database_open(db.cString);
 }
 
 - (void)viewDidAppear
 {
-    
-    [self showSetup];
+    if (self.connection->db->rows[0].deadline != 0) {
+        self.ctdn = &(self.connection->db->rows[0]);
+        [self setupCountdownTimer];
+    } else {
+        [self showSetup];
+    }
 }
 
 - (void)dealloc
 {
-    Countdown_destroy(self.ctdn);
+    Database_close(self.connection);
 }
 
 - (void)updateTimer {
@@ -62,7 +74,9 @@
     
     [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
         [self askAboutBackground];
-        [self setupCountdown:input.dateValue.timeIntervalSince1970];
+        self.ctdn = Countdown_createWithTimestamp("Title", input.dateValue.timeIntervalSince1970);
+        Countdown_save(self.connection, self.ctdn);
+        [self setupCountdownTimer];
     }];
 }
 
@@ -100,10 +114,8 @@
     }];
 }
 
-- (void)setupCountdown:(NSTimeInterval)deadline
+- (void)setupCountdownTimer
 {
-    self.ctdn = Countdown_createWithTimestamp("Title", deadline);
-    
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
