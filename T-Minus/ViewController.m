@@ -15,10 +15,20 @@
 @property (nonatomic) Countdown *ctdn;
 @property (nonatomic) Connection *connection;
 @property (nonatomic, strong) NSString *documentsPath;
+@property (nonatomic) NSTimeInterval deadline;
+@property (nonatomic, strong) NSString *backgroundPath;
 @end
 
 @implementation ViewController
 
+- (void)setBackgroundPath:(NSString *)backgroundPath
+{
+    NSURL *bgURL = [NSURL URLWithString:backgroundPath];
+    self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
+    if (self.backgroundView.image) {
+        self.countdownLabel.textColor = [NSColor whiteColor];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +46,7 @@
 {
     if (self.connection->db->rows[0].deadline != 0) {
         self.ctdn = &(self.connection->db->rows[0]);
+        self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
         [self setupCountdownTimer];
     } else {
         [self showSetup];
@@ -73,10 +84,8 @@
     alert.accessoryView = input;
     
     [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        self.deadline = input.dateValue.timeIntervalSince1970;
         [self askAboutBackground];
-        self.ctdn = Countdown_createWithTimestamp("Title", input.dateValue.timeIntervalSince1970);
-        Countdown_save(self.connection, self.ctdn);
-        [self setupCountdownTimer];
     }];
 }
 
@@ -106,10 +115,16 @@
     [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL *bgURL = panel.URLs.firstObject;
+            char *bgPath = NULL;
+            
             if (bgURL) {
-                self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-                self.countdownLabel.textColor = [NSColor whiteColor];
+                bgPath = bgURL.absoluteString.cString;
+                self.backgroundPath = bgURL.absoluteString;
             }
+            
+            self.ctdn = Countdown_createWithTimestamp("Title", self.deadline, bgPath);
+            Countdown_save(self.connection, self.ctdn);
+            [self setupCountdownTimer];
         }
     }];
 }

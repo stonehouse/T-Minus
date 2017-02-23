@@ -17,6 +17,7 @@
 
 #define MAX_ROWS 10
 #define MAX_TITLE 256
+#define MAX_BACKGROUND_PATH 512
 #define MAX_DESCRIPTION 100
 #define SECONDS_IN_DAY 86400
 #define SECONDS_IN_YEAR 31536000
@@ -24,6 +25,7 @@
 typedef struct Countdown {
     time_t deadline;
     char title[MAX_TITLE];
+    char background[MAX_BACKGROUND_PATH];
 } Countdown;
 
 typedef struct Tminus {
@@ -44,8 +46,8 @@ Connection* Database_open(const char *filename);
 void Database_close(Connection *conn);
 void Countdown_save(Connection *conn, Countdown *ctdn);
 
-Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute);
-Countdown* Countdown_createWithTimestamp(char *title, time_t deadline);
+Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute, char *backgroundPath);
+Countdown* Countdown_createWithTimestamp(char *title, time_t deadline, char *backgroundPath);
 
 Tminus* Countdown_tminus(Countdown *countdown);
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);

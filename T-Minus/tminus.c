@@ -80,11 +80,12 @@ void Countdown_save(Connection *conn, Countdown *ctdn)
     
     dbRow->deadline = ctdn->deadline;
     strncpy(dbRow->title, ctdn->title, MAX_TITLE-1);
+    strncpy(dbRow->background, ctdn->background, MAX_BACKGROUND_PATH-1);
     
     Database_write(conn);
 }
 
-Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute)
+Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute, char *backgroundPath)
 {
     struct tm t;
     time_t deadline;
@@ -97,10 +98,10 @@ Countdown* Countdown_create(char *title, int year, int month, int day, int hour,
     t.tm_isdst = -1;
     deadline = mktime(&t);
     
-    return Countdown_createWithTimestamp(title, deadline);
+    return Countdown_createWithTimestamp(title, deadline, backgroundPath);
 }
 
-Countdown* Countdown_createWithTimestamp(char *title, time_t deadline)
+Countdown* Countdown_createWithTimestamp(char *title, time_t deadline, char *backgroundPath)
 {
     printf("Creating countdown with deadline: %ld", deadline);
     
@@ -114,6 +115,7 @@ Countdown* Countdown_createWithTimestamp(char *title, time_t deadline)
     }
     
     strncpy(ctdn->title, title, MAX_TITLE-1);
+    strncpy(ctdn->background, backgroundPath, MAX_BACKGROUND_PATH-1);
     
     return ctdn;
 }
