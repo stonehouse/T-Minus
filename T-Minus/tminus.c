@@ -10,7 +10,9 @@
 
 void Database_load(Connection *conn)
 {
-    fread(conn->db, sizeof(Database), 1, conn->file);
+    size_t rc = fread(conn->db, sizeof(Database), 1, conn->file);
+    
+    if (rc != 1) printf("Error reading database!");
 }
 
 void Database_close(Connection *conn)
@@ -74,10 +76,10 @@ Connection* Database_open(const char *filename)
 
 void Countdown_save(Connection *conn, Countdown *ctdn)
 {
-    Countdown dbRow = conn->db->rows[0];
+    Countdown *dbRow = &conn->db->rows[0];
     
-    dbRow.deadline = ctdn->deadline;
-    strncpy(dbRow.title, ctdn->title, MAX_TITLE-1);
+    dbRow->deadline = ctdn->deadline;
+    strncpy(dbRow->title, ctdn->title, MAX_TITLE-1);
     
     Database_write(conn);
 }
