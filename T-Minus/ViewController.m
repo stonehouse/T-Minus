@@ -27,7 +27,7 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     self.documentsPath = [paths objectAtIndex:0];
-    NSString *db = [self.documentsPath stringByAppendingString:@"/tminus.db"];
+    NSString *db = [self.documentsPath stringByAppendingString:@"/.tminus.db"];
     
     self.connection = Database_open(db.cString);
 }
