@@ -56,7 +56,7 @@ void Database_create(Connection *conn)
     int i = 0;
     
     for (i = 0; i < MAX_ROWS; i++) {
-        Countdown ctdn = { .deadline = 0, .title = "" };
+        Countdown ctdn = { .index = i, .deadline = 0, .title = "" };
         
         conn->db->rows[i] = ctdn;
     }

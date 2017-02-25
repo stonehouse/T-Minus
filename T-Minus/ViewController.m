@@ -14,7 +14,7 @@
 @property (weak) IBOutlet NSImageView *backgroundView;
 @property (nonatomic) Countdown *ctdn;
 @property (nonatomic) Connection *connection;
-@property (nonatomic, strong) NSString *documentsPath;
+@property (nonatomic, strong) NSString *storagePath;
 @property (nonatomic) NSTimeInterval deadline;
 @property (nonatomic, strong) NSString *backgroundPath;
 @end
@@ -35,9 +35,8 @@
     
     self.countdownLabel.textColor = [NSColor blackColor];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    self.documentsPath = [paths objectAtIndex:0];
-    NSString *db = [self.documentsPath stringByAppendingString:@"/.tminus.db"];
+    self.storagePath = NSHomeDirectory();
+    NSString *db = [self.storagePath stringByAppendingString:@"/.tminus.db"];
     
     self.connection = Database_open(db.UTF8String);
 }
