@@ -46,6 +46,7 @@ Countdown* Countdown_get(Connection *conn);
 Countdown* Countdown_create(Connection *conn);
 Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath);
 void Countdown_save(Connection *conn, Countdown *ctdn);
+void Countdown_delete(Connection *conn, Countdown *ctdn);
 
 Tminus* Countdown_tminus(Countdown *countdown);
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);

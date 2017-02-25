@@ -51,14 +51,19 @@ void Database_write(Connection *conn)
     if (rc == -1) printf("Error flushing db %ld", rc);
 }
 
+void Database_createRow(Connection *conn, int row)
+{
+    Countdown ctdn = { .index = row, .deadline = 0, .title = "" };
+    
+    conn->db->rows[row] = ctdn;
+}
+
 void Database_create(Connection *conn)
 {
     int i = 0;
     
     for (i = 0; i < MAX_ROWS; i++) {
-        Countdown ctdn = { .index = i, .deadline = 0, .title = "" };
-        
-        conn->db->rows[i] = ctdn;
+        Database_createRow(conn, i);
     }
 }
 
@@ -132,6 +137,15 @@ Countdown* Countdown_create(Connection *conn)
     }
     
     return NULL;
+}
+
+void Countdown_delete(Connection *conn, Countdown *ctdn)
+{
+    int index = ctdn->index;
+    // Replace existing row with empty template
+    Database_createRow(conn, index);
+    Database_write(conn);
+    Countdown_destroy(ctdn);
 }
 
 Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath)
