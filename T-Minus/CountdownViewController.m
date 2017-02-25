@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alexander Stonehouse. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CountdownViewController.h"
 #include "tminus.h"
 
-@interface ViewController()
+@interface CountdownViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSImageView *backgroundView;
 @property (nonatomic) Countdown *ctdn;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *backgroundPath;
 @end
 
-@implementation ViewController
+@implementation CountdownViewController
 
 - (void)setBackgroundPath:(NSString *)backgroundPath
 {
@@ -132,6 +132,11 @@
 {
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+}
+
+- (void)newDocument:(id)sender
+{
+    
 }
 
 @end

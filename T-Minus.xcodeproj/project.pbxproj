@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FA6A22751E59F317005FCFF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22741E59F317005FCFF1 /* AppDelegate.m */; };
 		FA6A22781E59F317005FCFF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22771E59F317005FCFF1 /* main.m */; };
-		FA6A227B1E59F317005FCFF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A227A1E59F317005FCFF1 /* ViewController.m */; };
+		FA6A227B1E59F317005FCFF1 /* CountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A227A1E59F317005FCFF1 /* CountdownViewController.m */; };
 		FA6A227D1E59F317005FCFF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA6A227C1E59F317005FCFF1 /* Assets.xcassets */; };
 		FA6A22801E59F317005FCFF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6A227E1E59F317005FCFF1 /* Main.storyboard */; };
 		FA6A228B1E59F317005FCFF1 /* T_MinusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A228A1E59F317005FCFF1 /* T_MinusTests.m */; };
@@ -39,8 +39,8 @@
 		FA6A22731E59F317005FCFF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA6A22741E59F317005FCFF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FA6A22771E59F317005FCFF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FA6A22791E59F317005FCFF1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FA6A227A1E59F317005FCFF1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FA6A22791E59F317005FCFF1 /* CountdownViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountdownViewController.h; sourceTree = "<group>"; };
+		FA6A227A1E59F317005FCFF1 /* CountdownViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountdownViewController.m; sourceTree = "<group>"; };
 		FA6A227C1E59F317005FCFF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA6A227F1E59F317005FCFF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA6A22811E59F317005FCFF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,8 +105,8 @@
 				FA6A22A31E59F3D2005FCFF1 /* Core */,
 				FA6A22731E59F317005FCFF1 /* AppDelegate.h */,
 				FA6A22741E59F317005FCFF1 /* AppDelegate.m */,
-				FA6A22791E59F317005FCFF1 /* ViewController.h */,
-				FA6A227A1E59F317005FCFF1 /* ViewController.m */,
+				FA6A22791E59F317005FCFF1 /* CountdownViewController.h */,
+				FA6A227A1E59F317005FCFF1 /* CountdownViewController.m */,
 				FA6A227C1E59F317005FCFF1 /* Assets.xcassets */,
 				FA6A227E1E59F317005FCFF1 /* Main.storyboard */,
 				FA6A22811E59F317005FCFF1 /* Info.plist */,
@@ -282,7 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6A227B1E59F317005FCFF1 /* ViewController.m in Sources */,
+				FA6A227B1E59F317005FCFF1 /* CountdownViewController.m in Sources */,
 				FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */,
 				FA6A22781E59F317005FCFF1 /* main.m in Sources */,
 				FA6A22751E59F317005FCFF1 /* AppDelegate.m in Sources */,

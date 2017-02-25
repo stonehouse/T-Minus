@@ -689,7 +689,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hGm-1O-Oq9">
-                                <rect key="frame" x="200" y="121" width="81" height="30"/>
+                                <rect key="frame" x="200" y="120" width="81" height="30"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MEOW" id="87d-5w-qZt">
                                     <font key="font" metaFont="system" size="25"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -707,10 +707,10 @@
             </objects>
             <point key="canvasLocation" x="1352" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Countdown View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="CountdownViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
