@@ -102,10 +102,11 @@ Countdown* Countdown_getIndex(Connection *conn, int index)
 
 Countdown* Countdown_get(Connection *conn)
 {
-    int i = conn->readIndex;
+    int i;
+    int index = conn->readIndex;
     Countdown *ctdn;
     
-    for (i = 0; i < MAX_ROWS; i++) {
+    for (i = index; i < MAX_ROWS; i++) {
         ctdn = Countdown_getIndex(conn, i);
         conn->readIndex++;
         if (ctdn) {

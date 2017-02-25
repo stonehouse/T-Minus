@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include "tminus.h"
 
 @interface CountdownViewController : NSViewController
 
+@property (nonatomic) Connection *connection;
 
 @end
 

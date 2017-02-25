@@ -718,6 +718,9 @@
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eeU-nW-dZl">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="h60-YJ-ZkI"/>
+                                <connections>
+                                    <segue destination="B8D-0N-5wS" kind="show" identifier="newCountdown" id="bvT-ba-Fzw"/>
+                                </connections>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UOF-kK-zsZ">
                                 <rect key="frame" x="238" y="105" width="4" height="60"/>
@@ -744,7 +747,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81" y="761"/>
+            <point key="canvasLocation" x="181" y="875"/>
         </scene>
     </scenes>
 </document>

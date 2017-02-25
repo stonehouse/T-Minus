@@ -7,9 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include "tminus.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (nonatomic) Connection *connection;
+
+- (void)setupConnection;
 
 @end
 

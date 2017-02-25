@@ -7,13 +7,13 @@
 //
 
 #import "CountdownViewController.h"
-#include "tminus.h"
+#import "AppDelegate.h"
 
 @interface CountdownViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSImageView *backgroundView;
 @property (nonatomic) Countdown *ctdn;
-@property (nonatomic) Connection *connection;
+@property (nonatomic) Countdown *openingCtdn;
 @property (nonatomic, strong) NSString *storagePath;
 @property (nonatomic) NSTimeInterval deadline;
 @property (nonatomic, strong) NSString *backgroundPath;
@@ -34,27 +34,35 @@
     [super viewDidLoad];
     
     self.countdownLabel.textColor = [NSColor blackColor];
-    
-    self.storagePath = NSHomeDirectory();
-    NSString *db = [self.storagePath stringByAppendingString:@"/.tminus.db"];
-    
-    self.connection = Database_open(db.UTF8String);
 }
 
 - (void)viewDidAppear
 {
-    self.ctdn = Countdown_get(self.connection);
+    if (!self.connection) {
+        AppDelegate *delegate = (AppDelegate*) [NSApplication sharedApplication].delegate;
+        [delegate setupConnection];
+        self.connection = delegate.connection;
+    }
+    
     if (self.ctdn) {
         self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
         [self setupCountdownTimer];
     } else {
-        [self showSetup];
+        self.ctdn = Countdown_get(self.connection);
+        if (self.ctdn) {
+            self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
+            [self setupCountdownTimer];
+            
+            self.openingCtdn = Countdown_get(self.connection);
+            while (self.openingCtdn) {
+                [self performSegueWithIdentifier:@"newCountdown" sender:self];
+                self.openingCtdn = Countdown_get(self.connection);
+            }
+            self.openingCtdn = NULL;
+        } else {
+            [self showSetup];
+        }
     }
-}
-
-- (void)dealloc
-{
-    Database_close(self.connection);
 }
 
 - (void)updateTimer {
@@ -136,7 +144,22 @@
 
 - (void)newDocument:(id)sender
 {
-    
+    [self performSegueWithIdentifier:@"newCountdown" sender:self];
 }
+
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationController isKindOfClass:NSWindowController.class]) {
+        NSWindowController *window = (NSWindowController*) segue.destinationController;
+        if ([window.contentViewController isKindOfClass:CountdownViewController.class]) {
+            CountdownViewController *vc = (CountdownViewController*) window.contentViewController;
+            vc.connection = self.connection;
+            vc.ctdn = self.openingCtdn;
+        }
+        
+    }
+}
+
+
 
 @end

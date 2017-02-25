@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CountdownViewController.h"
 
 @interface AppDelegate ()
 
@@ -14,13 +15,25 @@
 
 @implementation AppDelegate
 
+-(void)applicationWillFinishLaunching:(NSNotification *)notification {
+    
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    
+    
+}
+
+- (void)setupConnection {
+    NSString *storagePath = NSHomeDirectory();
+    NSString *db = [storagePath stringByAppendingString:@"/.tminus.db"];
+    
+    self.connection = Database_open(db.UTF8String);
 }
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    Database_close(self.connection);
 }
 
 @end
