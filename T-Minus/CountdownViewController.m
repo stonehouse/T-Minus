@@ -143,6 +143,7 @@
 
 - (void)setupCountdownTimer
 {
+    [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
