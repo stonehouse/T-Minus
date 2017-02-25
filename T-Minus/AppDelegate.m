@@ -26,7 +26,11 @@
 
 - (void)setupConnection {
     NSString *storagePath = NSHomeDirectory();
+    #if DEBUG
+    NSString *db = [storagePath stringByAppendingString:@"/.tminus_debug.db"];
+    #else
     NSString *db = [storagePath stringByAppendingString:@"/.tminus.db"];
+    #endif
     
     self.connection = Database_open(db.UTF8String);
 }
