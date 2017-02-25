@@ -65,6 +65,11 @@
     }
 }
 
+- (void)dealloc
+{
+    Countdown_destroy(self.ctdn);
+}
+
 - (void)updateTimer {
     Tminus *tm = Countdown_tminus(self.ctdn);
     
@@ -158,6 +163,12 @@
         }
         
     }
+}
+
+- (void)cancel:(id)sender
+{
+    Countdown_delete(self.connection, self.ctdn);
+    [self.view.window close];
 }
 
 

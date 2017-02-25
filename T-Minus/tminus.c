@@ -145,7 +145,6 @@ void Countdown_delete(Connection *conn, Countdown *ctdn)
     // Replace existing row with empty template
     Database_createRow(conn, index);
     Database_write(conn);
-    Countdown_destroy(ctdn);
 }
 
 Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath)
