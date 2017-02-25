@@ -39,13 +39,13 @@
     self.documentsPath = [paths objectAtIndex:0];
     NSString *db = [self.documentsPath stringByAppendingString:@"/.tminus.db"];
     
-    self.connection = Database_open(db.cString);
+    self.connection = Database_open(db.UTF8String);
 }
 
 - (void)viewDidAppear
 {
-    if (self.connection->db->rows[0].deadline != 0) {
-        self.ctdn = &(self.connection->db->rows[0]);
+    self.ctdn = Countdown_get(self.connection);
+    if (self.ctdn) {
         self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
         [self setupCountdownTimer];
     } else {
@@ -115,14 +115,14 @@
     [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL *bgURL = panel.URLs.firstObject;
-            char *bgPath = NULL;
+            const char *bgPath = NULL;
             
             if (bgURL) {
-                bgPath = bgURL.absoluteString.cString;
+                bgPath = bgURL.absoluteString.UTF8String;
                 self.backgroundPath = bgURL.absoluteString;
             }
             
-            self.ctdn = Countdown_createWithTimestamp("Title", self.deadline, bgPath);
+            self.ctdn = Countdown_createWithTimestamp(self.connection, "Title", self.deadline, bgPath);
             Countdown_save(self.connection, self.ctdn);
             [self setupCountdownTimer];
         }

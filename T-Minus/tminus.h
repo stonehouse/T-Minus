@@ -23,6 +23,7 @@
 #define SECONDS_IN_YEAR 31536000
 
 typedef struct Countdown {
+    int index;
     time_t deadline;
     char title[MAX_TITLE];
     char background[MAX_BACKGROUND_PATH];
@@ -33,21 +34,18 @@ typedef struct Tminus {
     char description[MAX_DESCRIPTION];
 } Tminus;
 
-typedef struct Database {
-    Countdown rows[MAX_ROWS];
-} Database;
+typedef struct Database Database;
 
-typedef struct Connection {
-    FILE *file;
-    Database *db;
-} Connection;
+typedef struct Connection Connection;
 
 Connection* Database_open(const char *filename);
 void Database_close(Connection *conn);
-void Countdown_save(Connection *conn, Countdown *ctdn);
 
-Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute, char *backgroundPath);
-Countdown* Countdown_createWithTimestamp(char *title, time_t deadline, char *backgroundPath);
+time_t createTimestamp(int year, int month, int day, int hour, int minute);
+Countdown* Countdown_get(Connection *conn);
+Countdown* Countdown_create(Connection *conn);
+Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath);
+void Countdown_save(Connection *conn, Countdown *ctdn);
 
 Tminus* Countdown_tminus(Countdown *countdown);
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);

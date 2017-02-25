@@ -8,6 +8,16 @@
 
 #include "tminus.h"
 
+typedef struct Database {
+    Countdown rows[MAX_ROWS];
+} Database;
+
+typedef struct Connection {
+    FILE *file;
+    int readIndex;
+    Database *db;
+} Connection;
+
 void Database_load(Connection *conn)
 {
     size_t rc = fread(conn->db, sizeof(Database), 1, conn->file);
@@ -74,21 +84,71 @@ Connection* Database_open(const char *filename)
     return conn;
 }
 
-void Countdown_save(Connection *conn, Countdown *ctdn)
+Countdown* Countdown_getIndex(Connection *conn, int index)
 {
-    Countdown *dbRow = &conn->db->rows[0];
+    Countdown ctdn = conn->db->rows[index];
     
-    dbRow->deadline = ctdn->deadline;
-    strncpy(dbRow->title, ctdn->title, MAX_TITLE-1);
-    strncpy(dbRow->background, ctdn->background, MAX_BACKGROUND_PATH-1);
-    
-    Database_write(conn);
+    if (ctdn.deadline == 0) {
+        return NULL;
+    } else {
+        Countdown *ptr = malloc(sizeof(Countdown));
+        ptr->index = ctdn.index;
+        ptr->deadline = ctdn.deadline;
+        strncpy(ptr->title, ctdn.title, MAX_TITLE-1);
+        strncpy(ptr->background, ctdn.background, MAX_BACKGROUND_PATH-1);
+        return ptr;
+    }
 }
 
-Countdown* Countdown_create(char *title, int year, int month, int day, int hour, int minute, char *backgroundPath)
+Countdown* Countdown_get(Connection *conn)
+{
+    int i = conn->readIndex;
+    Countdown *ctdn;
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        ctdn = Countdown_getIndex(conn, i);
+        conn->readIndex++;
+        if (ctdn) {
+            return ctdn;
+        }
+    }
+    
+    return NULL;
+}
+
+Countdown* Countdown_create(Connection *conn)
+{
+    int i;
+    Countdown *ctdn;
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        ctdn = Countdown_getIndex(conn, i);
+        if (!ctdn) {
+            ctdn = malloc(sizeof(Countdown));
+            ctdn->index = i;
+            return ctdn;
+        }
+    }
+    
+    return NULL;
+}
+
+Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath)
+{
+    Countdown *ctdn = Countdown_create(conn);
+    if (ctdn) {
+        ctdn->deadline = deadline;
+        strncpy(ctdn->title, title, MAX_TITLE-1);
+        strncpy(ctdn->background, bgPath, MAX_BACKGROUND_PATH-1);
+    }
+    
+    return ctdn;
+}
+
+time_t createTimestamp(int year, int month, int day, int hour, int minute)
 {
     struct tm t;
-    time_t deadline;
+    time_t timestamp;
     t.tm_year = year-1900;
     t.tm_mon = month-1;
     t.tm_mday = day;
@@ -96,28 +156,21 @@ Countdown* Countdown_create(char *title, int year, int month, int day, int hour,
     t.tm_min = minute;
     t.tm_sec = 0;
     t.tm_isdst = -1;
-    deadline = mktime(&t);
+    timestamp = mktime(&t);
     
-    return Countdown_createWithTimestamp(title, deadline, backgroundPath);
+    return timestamp;
 }
 
-Countdown* Countdown_createWithTimestamp(char *title, time_t deadline, char *backgroundPath)
+void Countdown_save(Connection *conn, Countdown *ctdn)
 {
-    printf("Creating countdown with deadline: %ld", deadline);
+    printf("Saving countdown %d with deadline: %ld", ctdn->index, ctdn->deadline);
     
-    Countdown *ctdn = malloc(sizeof(Countdown));
+    Countdown *row = &conn->db->rows[ctdn->index];
+    row->deadline = ctdn->deadline;
+    strncpy(row->title, ctdn->title, MAX_TITLE-1);
+    strncpy(row->background, ctdn->background, MAX_BACKGROUND_PATH-1);
     
-    time_t now = time(NULL);
-    if (deadline < now) {
-        ctdn->deadline = now;
-    } else {
-        ctdn->deadline = deadline;
-    }
-    
-    strncpy(ctdn->title, title, MAX_TITLE-1);
-    strncpy(ctdn->background, backgroundPath, MAX_BACKGROUND_PATH-1);
-    
-    return ctdn;
+    Database_write(conn);
 }
 
 Tminus* Countdown_tminus(Countdown *countdown)
