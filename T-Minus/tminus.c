@@ -221,6 +221,20 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
     return tminus;
 }
 
+int Countdown_count(Connection *conn)
+{
+    int i;
+    int count = 0;
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        if (conn->db->rows[i].deadline != 0) {
+            count++;
+        }
+    }
+    
+    return count;
+}
+
 
 void Countdown_destroy(Countdown *countdown)
 {
