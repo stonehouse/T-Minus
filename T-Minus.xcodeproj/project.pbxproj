@@ -16,6 +16,8 @@
 		FA6A22961E59F317005FCFF1 /* T_MinusUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22951E59F317005FCFF1 /* T_MinusUITests.m */; };
 		FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22A41E59F3E7005FCFF1 /* tminus.c */; };
 		FA6BE4011E6320D3005D85CF /* CreateCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6BE4001E6320D3005D85CF /* CreateCountdownViewController.m */; };
+		FA6BE4031E632B19005D85CF /* CountdownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6BE4021E632B19005D85CF /* CountdownView.xib */; };
+		FA6BE4061E632B2D005D85CF /* CountdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6BE4051E632B2D005D85CF /* CountdownView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,9 @@
 		FA6A22A51E59F3E7005FCFF1 /* tminus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tminus.h; sourceTree = "<group>"; };
 		FA6BE3FF1E6320D3005D85CF /* CreateCountdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateCountdownViewController.h; sourceTree = "<group>"; };
 		FA6BE4001E6320D3005D85CF /* CreateCountdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateCountdownViewController.m; sourceTree = "<group>"; };
+		FA6BE4021E632B19005D85CF /* CountdownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountdownView.xib; sourceTree = "<group>"; };
+		FA6BE4041E632B2D005D85CF /* CountdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownView.h; sourceTree = "<group>"; };
+		FA6BE4051E632B2D005D85CF /* CountdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountdownView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,9 @@
 				FA6A227A1E59F317005FCFF1 /* CountdownViewController.m */,
 				FA6A227C1E59F317005FCFF1 /* Assets.xcassets */,
 				FA6A227E1E59F317005FCFF1 /* Main.storyboard */,
+				FA6BE4021E632B19005D85CF /* CountdownView.xib */,
+				FA6BE4041E632B2D005D85CF /* CountdownView.h */,
+				FA6BE4051E632B2D005D85CF /* CountdownView.m */,
 				FA6BE3FF1E6320D3005D85CF /* CreateCountdownViewController.h */,
 				FA6BE4001E6320D3005D85CF /* CreateCountdownViewController.m */,
 				FA6A22811E59F317005FCFF1 /* Info.plist */,
@@ -262,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6A227D1E59F317005FCFF1 /* Assets.xcassets in Resources */,
+				FA6BE4031E632B19005D85CF /* CountdownView.xib in Resources */,
 				FA6A22801E59F317005FCFF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +298,7 @@
 			files = (
 				FA6A227B1E59F317005FCFF1 /* CountdownViewController.m in Sources */,
 				FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */,
+				FA6BE4061E632B2D005D85CF /* CountdownView.m in Sources */,
 				FA6A22781E59F317005FCFF1 /* main.m in Sources */,
 				FA6BE4011E6320D3005D85CF /* CreateCountdownViewController.m in Sources */,
 				FA6A22751E59F317005FCFF1 /* AppDelegate.m in Sources */,

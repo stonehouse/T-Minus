@@ -9,29 +9,31 @@
 #import "CountdownViewController.h"
 #import "AppDelegate.h"
 #import "CreateCountdownViewController.h"
+#import "CountdownView.h"
 
 @interface CountdownViewController()
-@property (weak) IBOutlet NSTextFieldCell *countdownTitleLabel;
-@property (weak) IBOutlet NSTextFieldCell *countdownLabel;
-@property (weak) IBOutlet NSImageView *backgroundView;
-@property (nonatomic, strong) NSString *backgroundPath;
+@property (nonatomic, strong) CountdownView *countdownView;
 @property (nonatomic, strong) NSWindowController *createWindow;
 @end
 
 @implementation CountdownViewController
 
-- (void)setBackgroundPath:(NSString *)backgroundPath
-{
-    NSURL *bgURL = [NSURL URLWithString:backgroundPath];
-    self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-    if (self.backgroundView.image) {
-        self.countdownLabel.textColor = [NSColor whiteColor];
-        self.countdownTitleLabel.textColor = [NSColor whiteColor];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSArray *views = nil;
+    bool success = [[NSBundle mainBundle] loadNibNamed:@"CountdownView" owner:self topLevelObjects:&views];
+    
+    if (success) {
+        for (int i = 0; i < views.count; i++) {
+            id obj = [views objectAtIndex:i];
+            if ([obj isKindOfClass:CountdownView.class]) {
+                self.countdownView = (CountdownView*) obj;
+                [self.view addSubview:self.countdownView];
+            }
+        }
+        
+    }
 }
 
 - (void)viewDidAppear
@@ -51,7 +53,7 @@
 - (void)updateTimer {
     Tminus *tm = Countdown_tminus(self.ctdn);
     
-    self.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
+    self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
     
     Tminus_destroy(tm);
 }
@@ -62,7 +64,7 @@
         NSString *title = [NSString stringWithUTF8String:self.ctdn->title];
         self.view.window.title = title;
     }
-    self.backgroundPath = [NSString stringWithUTF8String:self.ctdn->background];
+    self.countdownView.backgroundPath = [NSString stringWithUTF8String:self.ctdn->background];
     [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
