@@ -8,6 +8,7 @@
 
 #import "CountdownViewController.h"
 #import "AppDelegate.h"
+#import "CreateCountdownViewController.h"
 
 @interface CountdownViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
@@ -16,6 +17,7 @@
 @property (nonatomic, strong) NSString *storagePath;
 @property (nonatomic) NSTimeInterval deadline;
 @property (nonatomic, strong) NSString *backgroundPath;
+@property (nonatomic, strong) NSWindowController *createWindow;
 @end
 
 @implementation CountdownViewController
@@ -31,17 +33,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.countdownLabel.textColor = [NSColor blackColor];
 }
 
 - (void)viewDidAppear
 {
     if (self.ctdn) {
-        self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
         [self setupCountdownTimer];
     } else {
-        [self showSetup];
+        [self createCountdown];
     }
 }
 
@@ -58,93 +57,38 @@
     Tminus_destroy(tm);
 }
 
-- (void)showSetup
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    
-    [alert setMessageText:@"What's your deadline?"];
-    [alert setInformativeText:NSLocalizedString(@"Let me know when your deadline is so we can start the...final countdown!", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
-    [alert setAlertStyle:NSAlertStyleInformational];
-    
-    NSDatePicker *input = [[NSDatePicker alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-    
-    NSDate *now = [NSDate date];
-    input.minDate = now;
-    input.dateValue = [now dateByAddingTimeInterval: SECONDS_IN_DAY * 10];
-    input.maxDate = [now dateByAddingTimeInterval: SECONDS_IN_YEAR];
-    alert.accessoryView = input;
-    
-    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-        self.deadline = input.dateValue.timeIntervalSince1970;
-        [self askAboutBackground];
-    }];
-}
-
-- (void)askAboutBackground
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    
-    [alert setMessageText:@"Do you what to pick a background?"];
-    [alert setInformativeText:NSLocalizedString(@"You can pick a custom background for your countdown if you like.", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-    [alert setAlertStyle:NSAlertStyleInformational];
-    
-    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-        if (returnCode == 1000) {
-            [self showBackgroundSelect];
-        }
-    }];
-}
-
-- (void)showBackgroundSelect
-{
-    NSOpenPanel *panel = [NSOpenPanel openPanel];
-    [panel setCanChooseFiles:YES];
-    [panel setCanChooseDirectories:NO];
-    [panel setAllowsMultipleSelection:NO];
-    [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSURL *bgURL = panel.URLs.firstObject;
-            const char *bgPath = NULL;
-            
-            if (bgURL) {
-                bgPath = bgURL.absoluteString.UTF8String;
-                self.backgroundPath = bgURL.absoluteString;
-            }
-            
-            self.ctdn = Countdown_createWithTimestamp(self.connection, "Title", self.deadline, bgPath);
-            Countdown_save(self.connection, self.ctdn);
-            [self setupCountdownTimer];
-        }
-    }];
-}
-
 - (void)setupCountdownTimer
 {
+    self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
     [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
-}
-
-- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationController isKindOfClass:NSWindowController.class]) {
-        NSWindowController *window = (NSWindowController*) segue.destinationController;
-        if ([window.contentViewController isKindOfClass:CountdownViewController.class]) {
-            CountdownViewController *vc = (CountdownViewController*) window.contentViewController;
-            vc.connection = self.connection;
-            vc.ctdn = self.openingCtdn;
-        }
-        
-    }
 }
 
 - (void)cancel:(id)sender
 {
     Countdown_delete(self.connection, self.ctdn);
     [self.view.window close];
+}
+
+- (void)createCountdown
+{
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    NSWindowController *vc = [storyboard instantiateControllerWithIdentifier:@"createCountdown"];
+    
+    CreateCountdownViewController *content = (CreateCountdownViewController*) vc.contentViewController;
+    content.conn = self.connection;
+    self.createWindow = vc;
+    
+    [self.view.window beginSheet:vc.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSModalResponseCancel) {
+            [self.view.window close];
+        } else {
+            CreateCountdownViewController *content = (CreateCountdownViewController*) self.createWindow.contentViewController;
+            self.ctdn = content.ctdn;
+            [self setupCountdownTimer];
+        }
+    }];
 }
 
 

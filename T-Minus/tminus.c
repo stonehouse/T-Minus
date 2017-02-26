@@ -152,8 +152,12 @@ Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, ti
     Countdown *ctdn = Countdown_create(conn);
     if (ctdn) {
         ctdn->deadline = deadline;
-        strncpy(ctdn->title, title, MAX_TITLE-1);
-        strncpy(ctdn->background, bgPath, MAX_BACKGROUND_PATH-1);
+        if (title) {
+            strncpy(ctdn->title, title, MAX_TITLE-1);
+        }
+        if (bgPath) {
+            strncpy(ctdn->background, bgPath, MAX_BACKGROUND_PATH-1);
+        }
     }
     
     return ctdn;

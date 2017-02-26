@@ -686,32 +686,140 @@
             </objects>
             <point key="canvasLocation" x="181" y="336"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="1tR-RM-iyb">
+        <!--Window Controller-->
+        <scene sceneID="Juz-G0-cMD">
             <objects>
-                <viewController id="jXk-Ah-Wb6" sceneMemberID="viewController">
-                    <view key="view" id="ix1-8i-0CQ">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <windowController storyboardIdentifier="createCountdown" id="tK0-63-awn" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="8r7-t6-JL1">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="400" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <value key="minSize" type="size" width="400" height="270"/>
+                        <value key="maxSize" type="size" width="400" height="270"/>
+                    </window>
+                    <connections>
+                        <segue destination="x2q-7v-Dq9" kind="relationship" relationship="window.shadowedContentViewController" id="9xo-ms-kui"/>
+                    </connections>
+                </windowController>
+                <customObject id="VhQ-yz-b8x" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="828" y="336"/>
+        </scene>
+        <!--New Countdown-->
+        <scene sceneID="bIy-4r-rSS">
+            <objects>
+                <viewController title="New Countdown" id="x2q-7v-Dq9" customClass="CreateCountdownViewController" sceneMemberID="viewController">
+                    <view key="view" id="KNl-hx-gSv">
+                        <rect key="frame" x="0.0" y="0.0" width="537" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hGm-1O-Oq9">
-                                <rect key="frame" x="200" y="120" width="81" height="30"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MEOW" id="87d-5w-qZt">
-                                    <font key="font" metaFont="system" size="25"/>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qcb-4H-45f">
+                                <rect key="frame" x="169" y="160" width="200" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="200" id="e1o-Tu-Soz"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Title" drawsBackground="YES" id="EIe-ft-JCa">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ieM-tn-7KS">
+                                <rect key="frame" x="169" y="117" width="203" height="27"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="bZl-Os-inE">
+                                    <font key="font" metaFont="system"/>
+                                    <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
+                                        <!--1982-02-12 08:00:00 -0800-->
+                                        <timeZone key="timeZone" name="US/Pacific"/>
+                                    </calendarDate>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
+                                </datePickerCell>
+                            </datePicker>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DfX-jd-jXL">
+                                <rect key="frame" x="163" y="69" width="212" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Custom Background" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pza-bb-Dvm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="addCustomBackground:" target="x2q-7v-Dq9" id="jhC-Fe-eeF"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Eh-xl-qV0">
+                                <rect key="frame" x="18" y="219" width="501" height="24"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="What's your deadline?" id="npx-CW-4xl">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UW0-MK-9xC">
+                                <rect key="frame" x="453" y="13" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rbv-TE-JAN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="save:" target="x2q-7v-Dq9" id="Lia-pR-7he"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KP4-Yh-cuD">
+                                <rect key="frame" x="368" y="13" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="krb-lQ-QkC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="x2q-7v-Dq9" id="dNp-NV-ezZ"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-Nf-898">
+                                <rect key="frame" x="18" y="202" width="501" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Let me know when your deadline is so we can start the...final countdown!" id="nxW-19-2s9">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="hGm-1O-Oq9" firstAttribute="centerX" secondItem="ix1-8i-0CQ" secondAttribute="centerX" id="TvX-dT-6QF"/>
-                            <constraint firstItem="hGm-1O-Oq9" firstAttribute="centerY" secondItem="ix1-8i-0CQ" secondAttribute="centerY" id="i7y-3h-elf"/>
+                            <constraint firstItem="eB0-Nf-898" firstAttribute="leading" secondItem="KNl-hx-gSv" secondAttribute="leading" constant="20" id="19I-Fd-wXj"/>
+                            <constraint firstItem="9Eh-xl-qV0" firstAttribute="leading" secondItem="KNl-hx-gSv" secondAttribute="leading" constant="20" id="9SI-BG-qkx"/>
+                            <constraint firstItem="DfX-jd-jXL" firstAttribute="leading" secondItem="ieM-tn-7KS" secondAttribute="leading" id="9Sb-pw-y2W"/>
+                            <constraint firstItem="DfX-jd-jXL" firstAttribute="top" secondItem="ieM-tn-7KS" secondAttribute="bottom" constant="20" id="9pO-Wa-TWG"/>
+                            <constraint firstItem="qcb-4H-45f" firstAttribute="centerX" secondItem="KNl-hx-gSv" secondAttribute="centerX" id="ELY-75-mgJ"/>
+                            <constraint firstItem="9Eh-xl-qV0" firstAttribute="top" secondItem="KNl-hx-gSv" secondAttribute="top" constant="27" id="Eej-tt-ZF1"/>
+                            <constraint firstItem="qcb-4H-45f" firstAttribute="top" secondItem="eB0-Nf-898" secondAttribute="bottom" constant="20" id="Hm8-Jr-vmP"/>
+                            <constraint firstItem="KP4-Yh-cuD" firstAttribute="centerY" secondItem="UW0-MK-9xC" secondAttribute="centerY" id="Jc9-Tm-Arz"/>
+                            <constraint firstItem="eB0-Nf-898" firstAttribute="top" secondItem="9Eh-xl-qV0" secondAttribute="bottom" id="LVx-UX-5li"/>
+                            <constraint firstAttribute="bottom" secondItem="UW0-MK-9xC" secondAttribute="bottom" constant="20" id="Ny6-gL-MwM"/>
+                            <constraint firstItem="ieM-tn-7KS" firstAttribute="top" secondItem="qcb-4H-45f" secondAttribute="bottom" constant="20" id="Ry6-Zg-MfC"/>
+                            <constraint firstAttribute="trailing" secondItem="9Eh-xl-qV0" secondAttribute="trailing" constant="20" id="TLV-WB-efR"/>
+                            <constraint firstItem="ieM-tn-7KS" firstAttribute="trailing" secondItem="qcb-4H-45f" secondAttribute="trailing" id="cKq-0H-air"/>
+                            <constraint firstItem="ieM-tn-7KS" firstAttribute="leading" secondItem="qcb-4H-45f" secondAttribute="leading" id="izy-ZI-Dnt"/>
+                            <constraint firstItem="DfX-jd-jXL" firstAttribute="trailing" secondItem="ieM-tn-7KS" secondAttribute="trailing" id="lVu-Nw-Ght"/>
+                            <constraint firstAttribute="trailing" secondItem="eB0-Nf-898" secondAttribute="trailing" constant="20" id="oA9-Ak-lSf"/>
+                            <constraint firstItem="UW0-MK-9xC" firstAttribute="leading" secondItem="KP4-Yh-cuD" secondAttribute="trailing" constant="15" id="qDQ-i6-Tyz"/>
+                            <constraint firstAttribute="trailing" secondItem="UW0-MK-9xC" secondAttribute="trailing" constant="20" id="s7G-LN-lrR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="deadlinePicker" destination="ieM-tn-7KS" id="Ciw-um-cEm"/>
+                        <outlet property="titleTextField" destination="qcb-4H-45f" id="Es2-Jr-HZJ"/>
+                    </connections>
                 </viewController>
-                <customObject id="KHT-jN-sx3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="enJ-ud-PH0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1352" y="250"/>
+            <point key="canvasLocation" x="829" y="817"/>
         </scene>
         <!--Countdown View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -729,7 +837,7 @@
                                 <rect key="frame" x="238" y="105" width="4" height="60"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="6fE-9h-RLC">
                                     <font key="font" metaFont="system" size="50"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
