@@ -11,12 +11,14 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) NSMutableArray<NSWindowController*>* windows;
+
 @end
 
 @implementation AppDelegate
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification {
-    
+    self.windows = [NSMutableArray new];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -38,6 +40,17 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     Database_close(self.connection);
+}
+
+- (void)newDocument:(id)sender
+{
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    NSWindowController *vc = [storyboard instantiateControllerWithIdentifier:@"countdownViewController"];
+    
+    CountdownViewController *content = (CountdownViewController*) vc.contentViewController;
+    content.connection = self.connection;
+    [self.windows addObject:vc];
+    [vc showWindow:self];
 }
 
 @end

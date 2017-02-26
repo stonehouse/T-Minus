@@ -148,11 +148,6 @@
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
-- (void)newDocument:(id)sender
-{
-    [self performSegueWithIdentifier:@"newCountdown" sender:self];
-}
-
 - (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationController isKindOfClass:NSWindowController.class]) {
