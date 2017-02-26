@@ -23,7 +23,8 @@
     
     NSDate *now = [NSDate date];
     self.deadlinePicker.minDate = now;
-    self.deadlinePicker.dateValue = [now dateByAddingTimeInterval: SECONDS_IN_DAY * 10];
+    time_t donnie = SECONDS_IN_DAY * 28 + SECONDS_IN_HOUR * 6 + 42 * 60 + 12; // Why are you wearing that stupid bunny suit?
+    self.deadlinePicker.dateValue = [now dateByAddingTimeInterval: donnie];
     self.deadlinePicker.maxDate = [now dateByAddingTimeInterval: SECONDS_IN_YEAR];
 }
 
