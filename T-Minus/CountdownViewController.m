@@ -11,11 +11,9 @@
 #import "CreateCountdownViewController.h"
 
 @interface CountdownViewController()
+@property (weak) IBOutlet NSTextFieldCell *countdownTitleLabel;
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSImageView *backgroundView;
-@property (nonatomic) Countdown *openingCtdn;
-@property (nonatomic, strong) NSString *storagePath;
-@property (nonatomic) NSTimeInterval deadline;
 @property (nonatomic, strong) NSString *backgroundPath;
 @property (nonatomic, strong) NSWindowController *createWindow;
 @end
@@ -28,6 +26,7 @@
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
     if (self.backgroundView.image) {
         self.countdownLabel.textColor = [NSColor whiteColor];
+        self.countdownTitleLabel.textColor = [NSColor whiteColor];
     }
 }
 
@@ -52,14 +51,18 @@
 - (void)updateTimer {
     Tminus *tm = Countdown_tminus(self.ctdn);
     
-    self.countdownLabel.stringValue = [NSString stringWithCString:tm->description encoding:NSASCIIStringEncoding];
+    self.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
     
     Tminus_destroy(tm);
 }
 
 - (void)setupCountdownTimer
 {
-    self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
+    if (strlen(self.ctdn->title) > 0) {
+        NSString *title = [NSString stringWithUTF8String:self.ctdn->title];
+        self.view.window.title = title;
+    }
+    self.backgroundPath = [NSString stringWithUTF8String:self.ctdn->background];
     [self updateTimer];
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];

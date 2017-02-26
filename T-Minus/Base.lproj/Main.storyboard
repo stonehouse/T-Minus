@@ -831,19 +831,34 @@ Gw
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eeU-nW-dZl">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="480" id="6Rk-Dy-M5o"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="270" id="snz-7c-JUe"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="h60-YJ-ZkI"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UOF-kK-zsZ">
-                                <rect key="frame" x="238" y="105" width="4" height="60"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="6fE-9h-RLC">
+                                <rect key="frame" x="18" y="105" width="444" height="60"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="12 Days 5:12:31" id="6fE-9h-RLC">
                                     <font key="font" metaFont="system" size="50"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AIm-TA-EQ9">
+                                <rect key="frame" x="18" y="165" width="58" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="T-Minus:" id="V91-jM-3Qm">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="UOF-kK-zsZ" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="BMv-du-NWu"/>
+                            <constraint firstAttribute="trailing" secondItem="UOF-kK-zsZ" secondAttribute="trailing" constant="20" id="1cZ-hM-s4c"/>
+                            <constraint firstItem="UOF-kK-zsZ" firstAttribute="top" secondItem="AIm-TA-EQ9" secondAttribute="bottom" id="FnY-PO-ZNf"/>
+                            <constraint firstItem="UOF-kK-zsZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="b3f-P3-I1r"/>
+                            <constraint firstItem="AIm-TA-EQ9" firstAttribute="leading" secondItem="UOF-kK-zsZ" secondAttribute="leading" id="b8v-c2-0DL"/>
                             <constraint firstItem="eeU-nW-dZl" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="dZp-ac-CFb"/>
                             <constraint firstAttribute="trailing" secondItem="eeU-nW-dZl" secondAttribute="trailing" id="hkY-Pn-kM3"/>
                             <constraint firstItem="UOF-kK-zsZ" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="iaL-IW-cnk"/>
@@ -854,6 +869,7 @@ Gw
                     <connections>
                         <outlet property="backgroundView" destination="eeU-nW-dZl" id="8UE-Je-rBk"/>
                         <outlet property="countdownLabel" destination="6fE-9h-RLC" id="ZkZ-8O-eW8"/>
+                        <outlet property="countdownTitleLabel" destination="V91-jM-3Qm" id="Cxt-p1-qrX"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
