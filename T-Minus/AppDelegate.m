@@ -19,6 +19,14 @@
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification {
     self.windows = [NSMutableArray new];
+    
+    [self setupConnection];
+    
+    Countdown *savedCountdown = Countdown_get(self.connection);
+    while (savedCountdown) {
+        [self openCountdown:savedCountdown];
+        savedCountdown = Countdown_get(self.connection);
+    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -42,15 +50,21 @@
     Database_close(self.connection);
 }
 
-- (void)newDocument:(id)sender
+- (void)openCountdown:(Countdown*)ctdn
 {
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     NSWindowController *vc = [storyboard instantiateControllerWithIdentifier:@"countdownViewController"];
     
     CountdownViewController *content = (CountdownViewController*) vc.contentViewController;
     content.connection = self.connection;
+    content.ctdn = ctdn;
     [self.windows addObject:vc];
     [vc showWindow:self];
+}
+
+- (void)newDocument:(id)sender
+{
+    [self openCountdown:NULL];
 }
 
 @end

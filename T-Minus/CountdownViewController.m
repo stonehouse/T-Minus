@@ -12,7 +12,6 @@
 @interface CountdownViewController()
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSImageView *backgroundView;
-@property (nonatomic) Countdown *ctdn;
 @property (nonatomic) Countdown *openingCtdn;
 @property (nonatomic, strong) NSString *storagePath;
 @property (nonatomic) NSTimeInterval deadline;
@@ -38,30 +37,11 @@
 
 - (void)viewDidAppear
 {
-    if (!self.connection) {
-        AppDelegate *delegate = (AppDelegate*) [NSApplication sharedApplication].delegate;
-        [delegate setupConnection];
-        self.connection = delegate.connection;
-    }
-    
     if (self.ctdn) {
         self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
         [self setupCountdownTimer];
     } else {
-        self.ctdn = Countdown_get(self.connection);
-        if (self.ctdn) {
-            self.backgroundPath = [NSString stringWithCString:self.ctdn->background encoding:NSASCIIStringEncoding];
-            [self setupCountdownTimer];
-            
-            self.openingCtdn = Countdown_get(self.connection);
-            while (self.openingCtdn) {
-                [self performSegueWithIdentifier:@"newCountdown" sender:self];
-                self.openingCtdn = Countdown_get(self.connection);
-            }
-            self.openingCtdn = NULL;
-        } else {
-            [self showSetup];
-        }
+        [self showSetup];
     }
 }
 

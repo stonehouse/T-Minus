@@ -12,6 +12,7 @@
 @interface CountdownViewController : NSViewController
 
 @property (nonatomic) Connection *connection;
+@property (nonatomic) Countdown *ctdn;
 
 @end
 
