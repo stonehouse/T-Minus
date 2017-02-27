@@ -32,6 +32,7 @@ typedef struct Countdown {
 } Countdown;
 
 typedef struct Tminus {
+    int finished;
     time_t difference;
     char description[MAX_DESCRIPTION];
 } Tminus;

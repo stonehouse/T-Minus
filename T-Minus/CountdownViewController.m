@@ -14,6 +14,7 @@
 @interface CountdownViewController()
 @property (nonatomic, strong) CountdownView *countdownView;
 @property (nonatomic, strong) NSWindowController *createWindow;
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation CountdownViewController
@@ -51,9 +52,21 @@
 }
 
 - (void)updateTimer {
+    if (!self.timer) {
+        return;
+    }
+    
     Tminus *tm = Countdown_tminus(self.ctdn);
     
     self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
+    
+    if (tm->finished == 1) {
+        // Timer finished
+        [self.timer invalidate];
+        self.timer = nil;
+        [NSApp activateIgnoringOtherApps:YES];
+        [[NSSound soundNamed:@"Basso"] play];
+    }
     
     Tminus_destroy(tm);
 }
@@ -66,7 +79,7 @@
     }
     self.countdownView.backgroundPath = [NSString stringWithUTF8String:self.ctdn->background];
     [self updateTimer];
-    [NSTimer scheduledTimerWithTimeInterval:1.0f
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 

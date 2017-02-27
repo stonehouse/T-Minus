@@ -93,7 +93,9 @@ Countdown* Countdown_getIndex(Connection *conn, int index)
 {
     Countdown ctdn = conn->db->rows[index];
     
-    if (ctdn.deadline == 0) {
+    long diff = difftime(ctdn.deadline, time(NULL));
+    
+    if (ctdn.deadline == 0 || diff <= 0) {
         return NULL;
     } else {
         Countdown *ptr = malloc(sizeof(Countdown));
@@ -202,9 +204,11 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
     
     long diff = difftime(countdown->deadline, currentTime);
     if (diff <= 0) {
+        tminus->finished = 1;
         tminus->difference = 0;
         sprintf(tminus->description, "Hope its not too late!");
     } else {
+        tminus->finished = 0;
         long rem = (long) diff % (long) SECONDS_IN_DAY;
         int hours = round(rem / 60 / 60);
         rem = rem % (60*60);
