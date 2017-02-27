@@ -7,6 +7,7 @@
 //
 
 #import "CountdownView.h"
+#import "NSImage+AverageColor.h"
 
 @interface CountdownView()
 
@@ -17,20 +18,12 @@
 
 @implementation CountdownView
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    
-    // Drawing code here.
-}
-
 - (void)setBackgroundPath:(NSString *)backgroundPath
 {
     NSURL *bgURL = [NSURL URLWithString:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-    if (self.backgroundView.image) {
-        self.countdownLabel.textColor = [NSColor whiteColor];
-        self.countdownTitleLabel.textColor = [NSColor whiteColor];
-    }
+    self.countdownLabel.textColor = [self.backgroundView.image idealTextColor];
+    self.countdownTitleLabel.textColor = [self.backgroundView.image idealTextColor];
 }
 
 @end

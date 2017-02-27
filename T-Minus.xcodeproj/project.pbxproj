@@ -18,6 +18,7 @@
 		FA6BE4011E6320D3005D85CF /* CreateCountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6BE4001E6320D3005D85CF /* CreateCountdownViewController.m */; };
 		FA6BE4031E632B19005D85CF /* CountdownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6BE4021E632B19005D85CF /* CountdownView.xib */; };
 		FA6BE4061E632B2D005D85CF /* CountdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6BE4051E632B2D005D85CF /* CountdownView.m */; };
+		FA6BE40A1E64AACA005D85CF /* NSImage+AverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6BE4091E64AACA005D85CF /* NSImage+AverageColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		FA6BE4021E632B19005D85CF /* CountdownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountdownView.xib; sourceTree = "<group>"; };
 		FA6BE4041E632B2D005D85CF /* CountdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownView.h; sourceTree = "<group>"; };
 		FA6BE4051E632B2D005D85CF /* CountdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountdownView.m; sourceTree = "<group>"; };
+		FA6BE4081E64AACA005D85CF /* NSImage+AverageColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+AverageColor.h"; sourceTree = "<group>"; };
+		FA6BE4091E64AACA005D85CF /* NSImage+AverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+AverageColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,7 @@
 		FA6A22721E59F317005FCFF1 /* T-Minus */ = {
 			isa = PBXGroup;
 			children = (
+				FA6BE4071E64AAA3005D85CF /* Utilities */,
 				FA6A22A31E59F3D2005FCFF1 /* Core */,
 				FA6A22731E59F317005FCFF1 /* AppDelegate.h */,
 				FA6A22741E59F317005FCFF1 /* AppDelegate.m */,
@@ -161,6 +165,15 @@
 				FA6A22A51E59F3E7005FCFF1 /* tminus.h */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		FA6BE4071E64AAA3005D85CF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FA6BE4081E64AACA005D85CF /* NSImage+AverageColor.h */,
+				FA6BE4091E64AACA005D85CF /* NSImage+AverageColor.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA6A227B1E59F317005FCFF1 /* CountdownViewController.m in Sources */,
+				FA6BE40A1E64AACA005D85CF /* NSImage+AverageColor.m in Sources */,
 				FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */,
 				FA6BE4061E632B2D005D85CF /* CountdownView.m in Sources */,
 				FA6A22781E59F317005FCFF1 /* main.m in Sources */,
