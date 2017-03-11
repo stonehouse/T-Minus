@@ -280,7 +280,7 @@ void Tminus_destroy(Tminus *tminus)
 
 // Test helpers
 
-Connection *Create_inMemoryDatabase() {
+Connection* Database_openInMemory() {
     Connection *conn = malloc(sizeof(Connection));
     
     conn->db = malloc(sizeof(Database));

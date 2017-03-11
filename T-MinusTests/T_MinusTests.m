@@ -19,7 +19,7 @@
 
 - (void)setUp
 {
-    self.conn = Create_inMemoryDatabase();
+    self.conn = Database_openInMemory();
 }
 
 - (void)tearDown
