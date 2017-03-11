@@ -62,5 +62,7 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);
 void Countdown_destroy(Countdown *countdown);
 void Tminus_destroy(Tminus *tminus);
 
+// Test helpers
+Connection *Create_inMemoryConnection();
 
 #endif /* tminus_h */

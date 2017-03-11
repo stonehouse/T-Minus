@@ -233,7 +233,7 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
             sprintf(tminus->description, "%d Seconds", seconds);
         } else {
             char *finalCountdown[] = {
-                "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One"
+                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"
             };
             sprintf(tminus->description, "%s...", finalCountdown[seconds-1]);
         }
@@ -265,5 +265,14 @@ void Countdown_destroy(Countdown *countdown)
 void Tminus_destroy(Tminus *tminus)
 {
     free(tminus);
+}
+
+// Test helpers
+
+Connection *Create_inMemoryConnection() {
+    Connection *conn = malloc(sizeof(Connection));
+    
+    conn->db = malloc(sizeof(Database));
+    return conn;
 }
 
