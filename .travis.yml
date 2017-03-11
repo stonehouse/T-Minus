@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: T-Minus.xcodeproj # path to your xcodeproj folder
+xcode_scheme: T-MinusTests
