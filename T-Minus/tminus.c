@@ -229,8 +229,13 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
             sprintf(tminus->description, "%02d:%02d:%02d", hours, minutes, seconds);
         } else if (minutes > 0) {
             sprintf(tminus->description, "%d Minutes %d", minutes, seconds);
+        } else if (seconds > 10) {
+            sprintf(tminus->description, "%d Seconds", seconds);
         } else {
-            sprintf(tminus->description, "%d", seconds);
+            char *finalCountdown[] = {
+                "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One"
+            };
+            sprintf(tminus->description, "%s...", finalCountdown[seconds-1]);
         }
     }
     
