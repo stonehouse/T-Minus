@@ -34,6 +34,10 @@ typedef struct Countdown {
 typedef struct Tminus {
     int finished;
     time_t difference;
+    int days;
+    int hours;
+    int minutes;
+    int seconds;
     char description[MAX_DESCRIPTION];
 } Tminus;
 

@@ -201,6 +201,7 @@ Tminus* Countdown_tminus(Countdown *countdown)
 Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
 {
     Tminus *tminus = malloc(sizeof(Tminus));
+    tminus->description[0] = '\0';
     
     long diff = difftime(countdown->deadline, currentTime);
     if (diff <= 0) {
@@ -216,11 +217,22 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
         int seconds = rem % 60;
         int days = round(diff / SECONDS_IN_DAY);
         
+        tminus->days = days;
+        tminus->hours = hours;
+        tminus->minutes = minutes;
+        tminus->seconds = seconds;
         tminus->difference = diff;
         
-        sprintf(tminus->description, "%d Days %d:%d:%d", days, hours, minutes, seconds);
+        if (days > 0) {
+            sprintf(tminus->description, "%d Days %02d:%02d:%02d", days, hours, minutes, seconds);
+        } else if (hours > 0) {
+            sprintf(tminus->description, "%02d:%02d:%02d", hours, minutes, seconds);
+        } else if (minutes > 0) {
+            sprintf(tminus->description, "%d Minutes %d", minutes, seconds);
+        } else {
+            sprintf(tminus->description, "%d", seconds);
+        }
     }
-    
     
     return tminus;
 }
