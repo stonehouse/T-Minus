@@ -50,10 +50,22 @@
     }
     
     self.ctdn = Countdown_createWithTimestamp(self.conn, title, deadline, bgPath);
-    Countdown_save(self.conn, self.ctdn);
+    int response;
+    
+    if (!self.ctdn) {
+        NSAlert *alert = [NSAlert new];
+        alert.messageText = @"Too Many Countdowns";
+        alert.informativeText = @"Sorry, but we do not currently support that many parallel countdowns. Try cancelling some running countdowns first.";
+        [alert addButtonWithTitle:@"OK"];
+        [alert runModal];
+        response = NSModalResponseCancel;
+    } else {
+        Countdown_save(self.conn, self.ctdn);
+        response = NSModalResponseOK;
+    }
     
     NSWindow *window = self.view.window;
-    [window.sheetParent endSheet:window returnCode:NSModalResponseOK];
+    [window.sheetParent endSheet:window returnCode:response];
 }
 
 - (IBAction)cancel:(id)sender
