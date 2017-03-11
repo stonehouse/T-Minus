@@ -54,9 +54,9 @@
     
     if (!self.ctdn) {
         NSAlert *alert = [NSAlert new];
-        alert.messageText = @"Too Many Countdowns";
-        alert.informativeText = @"Sorry, but we do not currently support that many parallel countdowns. Try cancelling some running countdowns first.";
-        [alert addButtonWithTitle:@"OK"];
+        alert.messageText = NSLocalizedString(@"Too Many Countdowns", nil);
+        alert.informativeText = NSLocalizedString(@"Sorry, but we do not currently support that many parallel countdowns. Try cancelling some running countdowns first.", nil);
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
         [alert runModal];
         response = NSModalResponseCancel;
     } else {
