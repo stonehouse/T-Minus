@@ -22,8 +22,8 @@
 {
     NSURL *bgURL = [NSURL URLWithString:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-    self.countdownLabel.textColor = [self.backgroundView.image idealTextColor];
-    self.countdownTitleLabel.textColor = [self.backgroundView.image idealTextColor];
+    self.countdownLabel.textColor = [self.backgroundView.image idealTextColor:self.backgroundView.bounds forSection:self.countdownLabel.controlView.bounds];
+    self.countdownTitleLabel.textColor = [self.backgroundView.image idealTextColor:self.backgroundView.bounds forSection:self.countdownTitleLabel.controlView.bounds];
 }
 
 @end

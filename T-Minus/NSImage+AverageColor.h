@@ -10,7 +10,7 @@
 
 @interface NSImage (AverageColor)
 
-- (NSColor *)averageColor;
-- (NSColor *)idealTextColor;
+- (NSColor *)averageColor:(CGRect)imageRect forSection:(CGRect)section;
+- (NSColor *)idealTextColor:(CGRect)imageRect forSection:(CGRect)section;
 
 @end
