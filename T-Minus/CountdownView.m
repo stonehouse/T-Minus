@@ -7,7 +7,7 @@
 //
 
 #import "CountdownView.h"
-#import "NSImage+AverageColor.h"
+#import "NSImageView+AverageColor.h"
 
 @interface CountdownView()
 
@@ -22,8 +22,9 @@
 {
     NSURL *bgURL = [NSURL URLWithString:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-    self.countdownLabel.textColor = [self.backgroundView.image idealTextColor:self.backgroundView.bounds forSection:self.countdownLabel.controlView.bounds];
-    self.countdownTitleLabel.textColor = [self.backgroundView.image idealTextColor:self.backgroundView.bounds forSection:self.countdownTitleLabel.controlView.bounds];
+    CGRect sectionCountdown = [self convertRect:self.countdownLabel.controlView.frame toView:self.backgroundView];
+    self.countdownLabel.textColor = [self.backgroundView idealTextColorForSection:sectionCountdown];
+    self.countdownTitleLabel.textColor = [self.countdownLabel.textColor copy];
 }
 
 @end

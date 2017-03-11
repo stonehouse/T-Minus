@@ -6,18 +6,29 @@
 //  Copyright © 2017 Alexander Stonehouse. All rights reserved.
 //
 
-#import "NSImage+AverageColor.h"
+#import "NSImageView+AverageColor.h"
 
-@implementation NSImage (AverageColor)
+@implementation NSImageView (AverageColor)
 
-- (NSColor *)averageColor:(CGRect)imageRect forSection:(CGRect)section {
+- (NSColor *)averageColor {
+    return [self averageColorForSection:self.bounds];
+}
+
+- (NSColor *)averageColorForSection:(CGRect)section {
+    NSColorSpace* colorSpaceObj = [NSColorSpace deviceRGBColorSpace];
+
+    if (!self.image) {
+        return [[NSColor whiteColor] colorUsingColorSpace:colorSpaceObj];
+    }
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGColorSpaceRef colorSpace = colorSpaceObj.CGColorSpace;
+    
     unsigned char rgba[4];
     CGContextRef context = CGBitmapContextCreate(rgba, 1, 1, 8, 4, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
     
+    CGRect bounds = self.bounds;
     
-    CGImageRef ref = [self CGImageForProposedRect:&imageRect context:nil hints:nil];
+    CGImageRef ref = [self.image CGImageForProposedRect:&bounds context:nil hints:nil];
     CGContextDrawImage(context, section, ref);
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(context);
@@ -38,9 +49,14 @@
     }
 }
 
-- (NSColor *)idealTextColor:(CGRect)imageRect forSection:(CGRect)section
+- (NSColor *)idealTextColor
 {
-    NSColor *avgColor = [self averageColor:imageRect forSection:section];
+    return [self idealTextColorForSection:self.bounds];
+}
+
+- (NSColor *)idealTextColorForSection:(CGRect)section
+{
+    NSColor *avgColor = [self averageColorForSection:section];
     CGFloat red = avgColor.redComponent * 255, green = avgColor.greenComponent * 255, blue = avgColor.blueComponent * 255;
     
     int threshold = 186;
