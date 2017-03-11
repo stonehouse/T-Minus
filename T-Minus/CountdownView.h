@@ -12,5 +12,8 @@
 
 @property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (nonatomic, strong) NSString *backgroundPath;
+@property (weak) IBOutlet NSImageView *backgroundView;
+
+- (void)adjustTextColor;
 
 @end

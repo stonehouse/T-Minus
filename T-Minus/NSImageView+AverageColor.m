@@ -21,15 +21,13 @@
         return [[NSColor whiteColor] colorUsingColorSpace:colorSpaceObj];
     }
     
-    CGColorSpaceRef colorSpace = colorSpaceObj.CGColorSpace;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
     unsigned char rgba[4];
     CGContextRef context = CGBitmapContextCreate(rgba, 1, 1, 8, 4, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
     
-    CGRect bounds = self.bounds;
-    
-    CGImageRef ref = [self.image CGImageForProposedRect:&bounds context:nil hints:nil];
-    CGContextDrawImage(context, section, ref);
+    CGImageRef ref = [self.image CGImageForProposedRect:&section context:nil hints:nil];
+    CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), ref);
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(context);
     
@@ -59,9 +57,8 @@
     NSColor *avgColor = [self averageColorForSection:section];
     CGFloat red = avgColor.redComponent * 255, green = avgColor.greenComponent * 255, blue = avgColor.blueComponent * 255;
     
-    int threshold = 186;
+    int threshold = 95;
     int bgDelta = ((red * 0.299) + (green * 0.587) + (blue * 0.114));
-    
     return (255 - bgDelta < threshold) ? [NSColor blackColor] : [NSColor whiteColor];
 }
 

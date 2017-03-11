@@ -12,7 +12,6 @@
 @interface CountdownView()
 
 @property (weak) IBOutlet NSTextFieldCell *countdownTitleLabel;
-@property (weak) IBOutlet NSImageView *backgroundView;
 
 @end
 
@@ -22,6 +21,11 @@
 {
     NSURL *bgURL = [NSURL URLWithString:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
+    [self adjustTextColor];
+}
+
+- (void)adjustTextColor
+{
     CGRect sectionCountdown = [self convertRect:self.countdownLabel.controlView.frame toView:self.backgroundView];
     self.countdownLabel.textColor = [self.backgroundView idealTextColorForSection:sectionCountdown];
     self.countdownTitleLabel.textColor = [self.countdownLabel.textColor copy];

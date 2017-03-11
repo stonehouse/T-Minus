@@ -13,17 +13,13 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AuJ-Iz-O21">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="AuJ-Iz-O21">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="480" id="IhD-SS-bZI"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="270" id="pMB-QS-abb"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ctI-ay-bQB"/>
+                    <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ctI-ay-bQB"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qgn-xA-33d">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Qgn-xA-33d">
                     <rect key="frame" x="18" y="105" width="444" height="60"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="12 Days 5:12:31" id="hPX-lE-mos">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="12 Days 5:12:31" id="hPX-lE-mos">
                         <font key="font" metaFont="system" size="50"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

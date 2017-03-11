@@ -11,7 +11,7 @@
 #import "CreateCountdownViewController.h"
 #import "CountdownView.h"
 
-@interface CountdownViewController()
+@interface CountdownViewController() <NSWindowDelegate>
 @property (nonatomic, strong) CountdownView *countdownView;
 @property (nonatomic, strong) NSWindowController *createWindow;
 @property (nonatomic, strong) NSTimer *timer;
@@ -31,20 +31,40 @@
             if ([obj isKindOfClass:CountdownView.class]) {
                 self.countdownView = (CountdownView*) obj;
                 [self.view addSubview:self.countdownView];
+                [self.countdownView setTranslatesAutoresizingMaskIntoConstraints:NO];
+                
+                // Add constraints to fix content to window size
+                NSArray<NSLayoutConstraint*> *constraints = [NSArray arrayWithObjects:
+                                                             [NSLayoutConstraint constraintWithItem:self.countdownView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f],
+                                                             [NSLayoutConstraint constraintWithItem:self.countdownView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.0f],
+                                                             [NSLayoutConstraint constraintWithItem:self.countdownView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.0f],
+                                                             [NSLayoutConstraint constraintWithItem:self.countdownView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0f],
+                                                             nil];
+                
+                [self.view addConstraints:constraints];
             }
         }
         
     }
+    
 }
 
 - (void)viewDidAppear
 {
+    self.view.window.delegate = self;
+    
     if (self.ctdn) {
         [self setupCountdownTimer];
     } else {
         [self createCountdown];
     }
 }
+
+- (void)windowDidResize:(NSNotification *)notification
+{
+    [self.countdownView adjustTextColor];
+}
+
 
 - (void)dealloc
 {
@@ -78,9 +98,41 @@
         self.view.window.title = title;
     }
     self.countdownView.backgroundPath = [NSString stringWithUTF8String:self.ctdn->background];
+    
+    [self setupWindow];
+    
     [self updateTimer];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+}
+
+- (void)setupWindow
+{
+    NSImage *bgImage = self.countdownView.backgroundView.image;
+    NSSize imgSize = bgImage.size;
+    
+    CGFloat defaultWidth = 560;
+    CGFloat defaultHeight = 300;
+    
+    if (imgSize.width > 0 && imgSize.height > 0) {
+        [self.view.window setContentAspectRatio:bgImage.size];
+        NSSize defaultContentSize;
+        
+        if (imgSize.width > imgSize.height) {
+            CGFloat ratio = imgSize.width / imgSize.height;
+            defaultContentSize = NSMakeSize(defaultWidth, defaultWidth / ratio);
+        } else {
+            CGFloat ratio = imgSize.height / imgSize.width;
+            defaultContentSize = NSMakeSize(defaultHeight / ratio, defaultHeight);
+        }
+        [self.view.window setContentSize:defaultContentSize];
+    } else {
+        [self.view.window setContentSize:NSMakeSize(defaultWidth, defaultHeight)];
+        [self.view.window setContentAspectRatio:NSMakeSize(defaultWidth, defaultHeight)];
+    }
+    
+    self.view.window.contentMaxSize = NSMakeSize(1000, 1000);
+    self.view.window.contentMinSize = NSMakeSize(defaultWidth/2, defaultHeight);
 }
 
 - (void)cancel:(id)sender
@@ -91,6 +143,7 @@
 
 - (void)createCountdown
 {
+    self.countdownView.countdownLabel.stringValue = @"";
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     NSWindowController *vc = [storyboard instantiateControllerWithIdentifier:@"createCountdown"];
     
