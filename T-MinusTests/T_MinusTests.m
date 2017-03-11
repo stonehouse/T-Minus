@@ -11,18 +11,27 @@
 
 @interface T_MinusTests : XCTestCase
 
+@property (nonatomic) Connection *conn;
+
 @end
 
 @implementation T_MinusTests
 
+- (void)setUp
+{
+    self.conn = Create_inMemoryDatabase();
+}
+
+- (void)tearDown
+{
+    Database_close(self.conn);
+}
+
 - (void)testWithSpecificDate {
-    Connection *conn = Create_inMemoryConnection();
-   // time_t now = time(NULL);
     
-  //  Countdown_createWithTimestamp(conn, "Test countdown", now+10, NULL);
-    
+
     time_t timestamp = createTimestamp(2017, 05, 7, 22, 30);
-    Countdown* ctdn = Countdown_createWithTimestamp(conn, "Relative to 19.02.17 7:25PM", timestamp, NULL);
+    Countdown* ctdn = Countdown_createWithTimestamp(self.conn, "Relative to 19.02.17 7:25PM", timestamp, NULL);
     
     Tminus *tm = Countdown_tminusRelative(ctdn, 1487528450);
     [self verifyTminus:tm description:"77 Days 02:09:10" days:77 hours:2 minutes:9 seconds:10];
@@ -32,10 +41,9 @@
 }
 
 - (void)testFinalCountdown {
-    Connection *conn = Create_inMemoryConnection();
     time_t now = time(NULL);
     
-    Countdown* ctdn = Countdown_createWithTimestamp(conn, "Test countdown", now+10, NULL);
+    Countdown* ctdn = Countdown_createWithTimestamp(self.conn, "Test countdown", now+10, NULL);
     
     Tminus *tm = Countdown_tminus(ctdn);
     
@@ -43,6 +51,46 @@
     
     Countdown_destroy(ctdn);
     Tminus_destroy(tm);
+}
+
+- (void)testCreateCountdown {
+    int i;
+    Countdown *ctdns[MAX_ROWS];
+    
+    for (i = 0; i <= MAX_ROWS; i++) {
+        
+        Countdown *ctdn = Countdown_create(self.conn);
+        
+        if (i == MAX_ROWS) {
+            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
+            continue;
+        }
+
+        ctdn->deadline = time(NULL) + i+1;
+        Countdown_save(self.conn, ctdn);
+        
+        if (i > 0) {
+            Countdown* lastCtdn = ctdns[i-1];
+            
+            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
+        }
+        ctdns[i] = ctdn;
+    }
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        Countdown_destroy(ctdns[i]);
+    }
+}
+
+- (void)testCreateReuse {
+    int i;
+    
+    for (i = 0; i < 3; i++) {
+        Countdown *ctdn = Countdown_create(self.conn);
+        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
+        
+        Countdown_destroy(ctdn);
+    }
 }
 
 - (void)verifyTminus:(Tminus*)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {

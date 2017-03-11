@@ -63,6 +63,6 @@ void Countdown_destroy(Countdown *countdown);
 void Tminus_destroy(Tminus *tminus);
 
 // Test helpers
-Connection *Create_inMemoryConnection();
+Connection *Create_inMemoryDatabase();
 
 #endif /* tminus_h */

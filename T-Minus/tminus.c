@@ -16,13 +16,14 @@ typedef struct Connection {
     FILE *file;
     int readIndex;
     Database *db;
+    int inMemory;
 } Connection;
 
 void Database_load(Connection *conn)
 {
     size_t rc = fread(conn->db, sizeof(Database), 1, conn->file);
     
-    if (rc != 1) printf("Error reading database!");
+    if (rc != 1) printf("Error reading database!\n");
 }
 
 void Database_close(Connection *conn)
@@ -40,15 +41,19 @@ void Database_close(Connection *conn)
 
 void Database_write(Connection *conn)
 {
+    if (conn->inMemory) {
+        return; // Don't write to file if in memory
+    }
+    
     rewind(conn->file);
     
     size_t rc = fwrite(conn->db, sizeof(Database), 1, conn->file);
     
-    if (rc != 1) printf("Error writing to db %ld", rc);
+    if (rc != 1) printf("Error writing to db %ld\n", rc);
     
     rc = fflush(conn->file);
     
-    if (rc == -1) printf("Error flushing db %ld", rc);
+    if (rc == -1) printf("Error flushing db %ld\n", rc);
 }
 
 void Database_createRow(Connection *conn, int row)
@@ -132,12 +137,17 @@ Countdown* Countdown_create(Connection *conn)
     for (i = 0; i < MAX_ROWS; i++) {
         ctdn = Countdown_getIndex(conn, i);
         if (!ctdn) {
+            printf("Creating countdown at index %d\n", i);
             ctdn = malloc(sizeof(Countdown));
             ctdn->index = i;
+            ctdn->deadline = 0;
+            ctdn->background[0] = '\0';
+            ctdn->title[0] = '\0';
             return ctdn;
         }
     }
     
+    printf("Max countdowns reached\n");
     return NULL;
 }
 
@@ -183,7 +193,7 @@ time_t createTimestamp(int year, int month, int day, int hour, int minute)
 
 void Countdown_save(Connection *conn, Countdown *ctdn)
 {
-    printf("Saving countdown %d with deadline: %ld", ctdn->index, ctdn->deadline);
+    printf("Saving countdown %d with deadline: %ld\n", ctdn->index, ctdn->deadline);
     
     Countdown *row = &conn->db->rows[ctdn->index];
     row->deadline = ctdn->deadline;
@@ -269,10 +279,12 @@ void Tminus_destroy(Tminus *tminus)
 
 // Test helpers
 
-Connection *Create_inMemoryConnection() {
+Connection *Create_inMemoryDatabase() {
     Connection *conn = malloc(sizeof(Connection));
     
     conn->db = malloc(sizeof(Database));
+    Database_create(conn);
+    conn->inMemory = 1;
     return conn;
 }
 
