@@ -76,6 +76,7 @@ Connection* Database_open(const char *filename)
 {
     Connection *conn = malloc(sizeof(Connection));
     
+    conn->inMemory = 0;
     conn->db = malloc(sizeof(Database));
     
     FILE *file = fopen(filename, "r+");
