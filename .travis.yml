@@ -3,7 +3,7 @@ osx_image: xcode8.2
 xcode_project: T-Minus.xcodeproj # path to your xcodeproj folder
 xcode_scheme: 'T-Minus Debug'
 script:
-   xcodebuild clean build test -scheme T-Minus\ Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty --color
+    xcodebuild clean build test -verbose -scheme T-Minus\ Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO 
 addons:
   code_climate:
     repo_token: 5b2c62ffaa4ce56bf517cfb95ecabe0f6e61326a2a926a7edfa62d8b5a5a6cd4
