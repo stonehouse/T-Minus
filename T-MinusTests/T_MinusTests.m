@@ -53,34 +53,34 @@
     Tminus_destroy(tm);
 }
 
-- (void)testCreateCountdown {
-    int i;
-    Countdown *ctdns[MAX_ROWS];
-    
-    for (i = 0; i <= MAX_ROWS; i++) {
-        
-        Countdown *ctdn = Countdown_create(self.conn);
-        
-        if (i == MAX_ROWS) {
-            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
-            continue;
-        }
-
-        ctdn->deadline = time(NULL) + i+1;
-        Countdown_save(self.conn, ctdn);
-        
-        if (i > 0) {
-            Countdown* lastCtdn = ctdns[i-1];
-            
-            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
-        }
-        ctdns[i] = ctdn;
-    }
-    
-    for (i = 0; i < MAX_ROWS; i++) {
-        Countdown_destroy(ctdns[i]);
-    }
-}
+//- (void)testCreateCountdown {
+//    int i;
+//    Countdown *ctdns[MAX_ROWS];
+//    
+//    for (i = 0; i <= MAX_ROWS; i++) {
+//        
+//        Countdown *ctdn = Countdown_create(self.conn);
+//        
+//        if (i == MAX_ROWS) {
+//            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
+//            continue;
+//        }
+//
+//        ctdn->deadline = time(NULL) + i+1;
+//        Countdown_save(self.conn, ctdn);
+//        
+//        if (i > 0) {
+//            Countdown* lastCtdn = ctdns[i-1];
+//            
+//            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
+//        }
+//        ctdns[i] = ctdn;
+//    }
+//    
+//    for (i = 0; i < MAX_ROWS; i++) {
+//        Countdown_destroy(ctdns[i]);
+//    }
+//}
 
 - (void)testCreateReuse {
     int i;
