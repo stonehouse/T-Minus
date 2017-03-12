@@ -28,10 +28,13 @@
         savedCountdown = Countdown_get(self.connection);
     }
     
+    #if DEBUG
+    #else
     // If there are no saved countdowns, create a new one
     if (Countdown_count(self.connection) == 0) {
         [self openCountdown:NULL];
     }
+    #endif
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
