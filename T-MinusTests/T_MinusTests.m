@@ -82,16 +82,16 @@
 //    }
 //}
 
-- (void)testCreateReuse {
-    int i;
-    
-    for (i = 0; i < 3; i++) {
-        Countdown *ctdn = Countdown_create(self.conn);
-        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
-        
-        Countdown_destroy(ctdn);
-    }
-}
+//- (void)testCreateReuse {
+//    int i;
+//    
+//    for (i = 0; i < 3; i++) {
+//        Countdown *ctdn = Countdown_create(self.conn);
+//        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
+//        
+//        Countdown_destroy(ctdn);
+//    }
+//}
 
 - (void)verifyTminus:(Tminus*)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
     XCTAssertEqual(finished, tm->finished, "Finished does not match expected");
