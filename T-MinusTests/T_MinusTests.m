@@ -53,45 +53,45 @@
     Tminus_destroy(tm);
 }
 
-//- (void)testCreateCountdown {
-//    int i;
-//    Countdown *ctdns[MAX_ROWS];
-//    
-//    for (i = 0; i <= MAX_ROWS; i++) {
-//        
-//        Countdown *ctdn = Countdown_create(self.conn);
-//        
-//        if (i == MAX_ROWS) {
-//            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
-//            continue;
-//        }
-//
-//        ctdn->deadline = time(NULL) + i+1;
-//        Countdown_save(self.conn, ctdn);
-//        
-//        if (i > 0) {
-//            Countdown* lastCtdn = ctdns[i-1];
-//            
-//            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
-//        }
-//        ctdns[i] = ctdn;
-//    }
-//    
-//    for (i = 0; i < MAX_ROWS; i++) {
-//        Countdown_destroy(ctdns[i]);
-//    }
-//}
+- (void)testCreateCountdown {
+    int i;
+    Countdown *ctdns[MAX_ROWS];
+    
+    for (i = 0; i <= MAX_ROWS; i++) {
+        
+        Countdown *ctdn = Countdown_create(self.conn);
+        
+        if (i == MAX_ROWS) {
+            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
+            continue;
+        }
 
-//- (void)testCreateReuse {
-//    int i;
-//    
-//    for (i = 0; i < 3; i++) {
-//        Countdown *ctdn = Countdown_create(self.conn);
-//        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
-//        
-//        Countdown_destroy(ctdn);
-//    }
-//}
+        ctdn->deadline = time(NULL) + i+1;
+        Countdown_save(self.conn, ctdn);
+        
+        if (i > 0) {
+            Countdown* lastCtdn = ctdns[i-1];
+            
+            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
+        }
+        ctdns[i] = ctdn;
+    }
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        Countdown_destroy(ctdns[i]);
+    }
+}
+
+- (void)testCreateReuse {
+    int i;
+    
+    for (i = 0; i < 3; i++) {
+        Countdown *ctdn = Countdown_create(self.conn);
+        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
+        
+        Countdown_destroy(ctdn);
+    }
+}
 
 - (void)verifyTminus:(Tminus*)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
     XCTAssertEqual(finished, tm->finished, "Finished does not match expected");
