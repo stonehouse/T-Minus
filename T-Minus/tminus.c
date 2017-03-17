@@ -218,7 +218,7 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
     if (diff <= 0) {
         tminus->finished = 1;
         tminus->difference = 0;
-        sprintf(tminus->description, "Hope its not too late!");
+        sprintf(tminus->description, "Lift Off!");
     } else {
         tminus->finished = 0;
         long rem = (long) diff % (long) SECONDS_IN_DAY;

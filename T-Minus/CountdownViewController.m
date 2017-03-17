@@ -80,12 +80,15 @@
     
     self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
     
+    if (tm->difference == 10) {
+        [NSApp activateIgnoringOtherApps:YES];
+    }
+    
     if (tm->finished == 1) {
         // Timer finished
+        [[NSSound soundNamed:@"Basso"] play];
         [self.timer invalidate];
         self.timer = nil;
-        [NSApp activateIgnoringOtherApps:YES];
-        [[NSSound soundNamed:@"Basso"] play];
     }
     
     Tminus_destroy(tm);
