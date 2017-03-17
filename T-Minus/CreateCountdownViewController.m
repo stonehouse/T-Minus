@@ -68,6 +68,21 @@
     [window.sheetParent endSheet:window returnCode:response];
 }
 
+- (IBAction)fiveMinutes:(id)sender
+{
+    self.deadlinePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:SECONDS_IN_HOUR / 12];
+}
+
+- (IBAction)fifteenMinutes:(id)sender
+{
+    self.deadlinePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:SECONDS_IN_HOUR / 4];
+}
+
+- (IBAction)oneHour:(id)sender
+{
+    self.deadlinePicker.dateValue = [NSDate dateWithTimeIntervalSinceNow:SECONDS_IN_HOUR];
+}
+
 - (IBAction)cancel:(id)sender
 {
     NSWindow *window = self.view.window;

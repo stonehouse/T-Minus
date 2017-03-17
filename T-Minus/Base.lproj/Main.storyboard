@@ -694,8 +694,8 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="400" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <value key="minSize" type="size" width="400" height="270"/>
-                        <value key="maxSize" type="size" width="400" height="270"/>
+                        <value key="minSize" type="size" width="400" height="300"/>
+                        <value key="maxSize" type="size" width="400" height="300"/>
                     </window>
                     <connections>
                         <segue destination="x2q-7v-Dq9" kind="relationship" relationship="window.shadowedContentViewController" id="9xo-ms-kui"/>
@@ -738,7 +738,7 @@
                                 </datePickerCell>
                             </datePicker>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DfX-jd-jXL">
-                                <rect key="frame" x="163" y="69" width="212" height="32"/>
+                                <rect key="frame" x="163" y="28" width="212" height="32"/>
                                 <buttonCell key="cell" type="push" title="Add Custom Background" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pza-bb-Dvm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -789,26 +789,62 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ANK-gb-QpB">
+                                <rect key="frame" x="329" y="69" width="80" height="32"/>
+                                <buttonCell key="cell" type="push" title="1 Hour" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="28X-xH-gGU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="oneHour:" target="x2q-7v-Dq9" id="RFp-uc-reS"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vxM-7C-a7F">
+                                <rect key="frame" x="107" y="69" width="100" height="32"/>
+                                <buttonCell key="cell" type="push" title="5 Minutes" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fp7-g2-FoF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="fiveMinutes:" target="x2q-7v-Dq9" id="Y5q-cF-Tge"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="42r-hT-tZN">
+                                <rect key="frame" x="215" y="69" width="106" height="32"/>
+                                <buttonCell key="cell" type="push" title="15 Minutes" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X4s-XJ-aJx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="fifteenMinutes:" target="x2q-7v-Dq9" id="U7m-jg-2m3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="eB0-Nf-898" firstAttribute="leading" secondItem="KNl-hx-gSv" secondAttribute="leading" constant="20" id="19I-Fd-wXj"/>
                             <constraint firstItem="9Eh-xl-qV0" firstAttribute="leading" secondItem="KNl-hx-gSv" secondAttribute="leading" constant="20" id="9SI-BG-qkx"/>
                             <constraint firstItem="DfX-jd-jXL" firstAttribute="leading" secondItem="ieM-tn-7KS" secondAttribute="leading" id="9Sb-pw-y2W"/>
-                            <constraint firstItem="DfX-jd-jXL" firstAttribute="top" secondItem="ieM-tn-7KS" secondAttribute="bottom" constant="20" id="9pO-Wa-TWG"/>
+                            <constraint firstItem="DfX-jd-jXL" firstAttribute="top" secondItem="42r-hT-tZN" secondAttribute="bottom" constant="20" id="9iQ-QE-yQH"/>
+                            <constraint firstItem="42r-hT-tZN" firstAttribute="top" secondItem="ieM-tn-7KS" secondAttribute="bottom" constant="20" id="BmH-ks-mE1"/>
                             <constraint firstItem="qcb-4H-45f" firstAttribute="centerX" secondItem="KNl-hx-gSv" secondAttribute="centerX" id="ELY-75-mgJ"/>
                             <constraint firstItem="9Eh-xl-qV0" firstAttribute="top" secondItem="KNl-hx-gSv" secondAttribute="top" constant="27" id="Eej-tt-ZF1"/>
+                            <constraint firstItem="ANK-gb-QpB" firstAttribute="centerY" secondItem="42r-hT-tZN" secondAttribute="centerY" id="G8p-CL-XeO"/>
                             <constraint firstItem="qcb-4H-45f" firstAttribute="top" secondItem="eB0-Nf-898" secondAttribute="bottom" constant="20" id="Hm8-Jr-vmP"/>
                             <constraint firstItem="KP4-Yh-cuD" firstAttribute="centerY" secondItem="UW0-MK-9xC" secondAttribute="centerY" id="Jc9-Tm-Arz"/>
                             <constraint firstItem="eB0-Nf-898" firstAttribute="top" secondItem="9Eh-xl-qV0" secondAttribute="bottom" id="LVx-UX-5li"/>
                             <constraint firstAttribute="bottom" secondItem="UW0-MK-9xC" secondAttribute="bottom" constant="20" id="Ny6-gL-MwM"/>
                             <constraint firstItem="ieM-tn-7KS" firstAttribute="top" secondItem="qcb-4H-45f" secondAttribute="bottom" constant="20" id="Ry6-Zg-MfC"/>
                             <constraint firstAttribute="trailing" secondItem="9Eh-xl-qV0" secondAttribute="trailing" constant="20" id="TLV-WB-efR"/>
+                            <constraint firstItem="vxM-7C-a7F" firstAttribute="centerY" secondItem="42r-hT-tZN" secondAttribute="centerY" id="aNU-a6-Ydc"/>
                             <constraint firstItem="ieM-tn-7KS" firstAttribute="trailing" secondItem="qcb-4H-45f" secondAttribute="trailing" id="cKq-0H-air"/>
+                            <constraint firstItem="42r-hT-tZN" firstAttribute="centerX" secondItem="KNl-hx-gSv" secondAttribute="centerX" id="fF7-GO-qj6"/>
                             <constraint firstItem="ieM-tn-7KS" firstAttribute="leading" secondItem="qcb-4H-45f" secondAttribute="leading" id="izy-ZI-Dnt"/>
                             <constraint firstItem="DfX-jd-jXL" firstAttribute="trailing" secondItem="ieM-tn-7KS" secondAttribute="trailing" id="lVu-Nw-Ght"/>
                             <constraint firstAttribute="trailing" secondItem="eB0-Nf-898" secondAttribute="trailing" constant="20" id="oA9-Ak-lSf"/>
                             <constraint firstItem="UW0-MK-9xC" firstAttribute="leading" secondItem="KP4-Yh-cuD" secondAttribute="trailing" constant="15" id="qDQ-i6-Tyz"/>
+                            <constraint firstItem="42r-hT-tZN" firstAttribute="leading" secondItem="vxM-7C-a7F" secondAttribute="trailing" constant="20" id="qTT-lM-yKo"/>
                             <constraint firstAttribute="trailing" secondItem="UW0-MK-9xC" secondAttribute="trailing" constant="20" id="s7G-LN-lrR"/>
+                            <constraint firstItem="ANK-gb-QpB" firstAttribute="leading" secondItem="42r-hT-tZN" secondAttribute="trailing" constant="20" id="vcJ-FW-gka"/>
                         </constraints>
                     </view>
                     <connections>
