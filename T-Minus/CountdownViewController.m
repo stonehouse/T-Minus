@@ -76,22 +76,20 @@
         return;
     }
     
-    Tminus *tm = Countdown_tminus(self.ctdn);
+    Tminus tm = Countdown_tminus(self.ctdn);
     
-    self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm->description];
+    self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm.description];
     
-    if (tm->difference == 10) {
+    if (tm.difference == 10) {
         [NSApp activateIgnoringOtherApps:YES];
     }
     
-    if (tm->finished == 1) {
+    if (tm.finished == 1) {
         // Timer finished
         [[NSSound soundNamed:@"Basso"] play];
         [self.timer invalidate];
         self.timer = nil;
     }
-    
-    Tminus_destroy(tm);
 }
 
 - (void)setupCountdownTimer

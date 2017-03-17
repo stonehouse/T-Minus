@@ -56,11 +56,10 @@ Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, ti
 void Countdown_save(Connection *conn, Countdown *ctdn);
 void Countdown_delete(Connection *conn, Countdown *ctdn);
 
-Tminus* Countdown_tminus(Countdown *countdown);
-Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime);
+Tminus Countdown_tminus(Countdown *countdown);
+Tminus Countdown_tminusRelative(Countdown *countdown, time_t currentTime);
 
 void Countdown_destroy(Countdown *countdown);
-void Tminus_destroy(Tminus *tminus);
 
 // Test helpers
 Connection *Database_openInMemory();

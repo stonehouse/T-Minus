@@ -204,23 +204,23 @@ void Countdown_save(Connection *conn, Countdown *ctdn)
     Database_write(conn);
 }
 
-Tminus* Countdown_tminus(Countdown *countdown)
+Tminus Countdown_tminus(Countdown *countdown)
 {
     return Countdown_tminusRelative(countdown, time(NULL));
 }
 
-Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
+Tminus Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
 {
-    Tminus *tminus = malloc(sizeof(Tminus));
-    tminus->description[0] = '\0';
+    Tminus tminus;
+    tminus.description[0] = '\0';
     
     long diff = difftime(countdown->deadline, currentTime);
     if (diff <= 0) {
-        tminus->finished = 1;
-        tminus->difference = 0;
-        sprintf(tminus->description, "Lift Off!");
+        tminus.finished = 1;
+        tminus.difference = 0;
+        sprintf(tminus.description, "Lift Off!");
     } else {
-        tminus->finished = 0;
+        tminus.finished = 0;
         long rem = (long) diff % (long) SECONDS_IN_DAY;
         int hours = round(rem / 60 / 60);
         rem = rem % (60*60);
@@ -228,25 +228,25 @@ Tminus* Countdown_tminusRelative(Countdown *countdown, time_t currentTime)
         int seconds = rem % 60;
         int days = round(diff / SECONDS_IN_DAY);
         
-        tminus->days = days;
-        tminus->hours = hours;
-        tminus->minutes = minutes;
-        tminus->seconds = seconds;
-        tminus->difference = diff;
+        tminus.days = days;
+        tminus.hours = hours;
+        tminus.minutes = minutes;
+        tminus.seconds = seconds;
+        tminus.difference = diff;
         
         if (days > 0) {
-            sprintf(tminus->description, "%d Days %02d:%02d:%02d", days, hours, minutes, seconds);
+            sprintf(tminus.description, "%d Days %02d:%02d:%02d", days, hours, minutes, seconds);
         } else if (hours > 0) {
-            sprintf(tminus->description, "%02d:%02d:%02d", hours, minutes, seconds);
+            sprintf(tminus.description, "%02d:%02d:%02d", hours, minutes, seconds);
         } else if (minutes > 0) {
-            sprintf(tminus->description, "%d Minutes %d", minutes, seconds);
+            sprintf(tminus.description, "%d Minutes %d", minutes, seconds);
         } else if (seconds > 10) {
-            sprintf(tminus->description, "%d Seconds", seconds);
+            sprintf(tminus.description, "%d Seconds", seconds);
         } else {
             char *finalCountdown[] = {
                 "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"
             };
-            sprintf(tminus->description, "%s...", finalCountdown[seconds-1]);
+            sprintf(tminus.description, "%s...", finalCountdown[seconds-1]);
         }
     }
     
@@ -271,11 +271,6 @@ int Countdown_count(Connection *conn)
 void Countdown_destroy(Countdown *countdown)
 {
     free(countdown);
-}
-
-void Tminus_destroy(Tminus *tminus)
-{
-    free(tminus);
 }
 
 // Test helpers
