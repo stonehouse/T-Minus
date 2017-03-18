@@ -13,30 +13,60 @@
 
 @interface TodayViewController () <NCWidgetProviding>
 
+@property (nonatomic, weak) IBOutlet NSTextFieldCell *titleLabel;
 @property (nonatomic, weak) IBOutlet NSTextFieldCell *label;
 @property (nonatomic, weak) IBOutlet NSImageView *image;
+
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) Connection *conn;
+@property (nonatomic) Countdown *ctdn;
 
 @end
 
 @implementation TodayViewController
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult result))completionHandler {
-    Connection *conn = [TminusMacUtils defaultConnection];
+    if (self.conn) {
+        [self.timer invalidate];
+    } else {
+        self.conn = [TminusMacUtils defaultConnection];
+    }
+
     
-    Countdown *ctdn = Countdown_getMostUrgent(conn);
+    self.ctdn = Countdown_getMostUrgent(self.conn);
     
-    if (ctdn) {
-        Tminus tm = Countdown_tminus(ctdn);
+    if (self.ctdn) {
+        if (strlen(self.ctdn->title) > 0) {
+            self.titleLabel.stringValue = [NSString stringWithUTF8String:self.ctdn->title];
+        } else {
+            self.titleLabel.stringValue = @"T-Minus";
+        }
         
-        self.label.stringValue = [NSString stringWithUTF8String:tm.description];
-        self.image.image = [TminusMacUtils imageForCountdown:ctdn];
+        self.image.image = [TminusMacUtils imageForCountdown:self.ctdn];
+        [self updateTimer];
+        [self setupTimer];
         completionHandler(NCUpdateResultNewData);
     } else {
         self.image.image = nil;
         self.label.stringValue = NSLocalizedString(@"Nothing to see here", nil);
         completionHandler(NCUpdateResultNoData);
     }
-    
+}
+
+- (void)updateTimer
+{
+    if (self.ctdn) {
+        Tminus tm = Countdown_tminus(self.ctdn);
+        
+        self.label.stringValue = [NSString stringWithUTF8String:tm.description];
+    }
+}
+
+- (void)setupTimer
+{
+    [self updateTimer];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                  target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
 
 @end

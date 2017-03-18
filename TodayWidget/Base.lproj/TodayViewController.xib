@@ -5,44 +5,66 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TodayViewController">
             <connections>
                 <outlet property="image" destination="9ZT-qd-VZ2" id="jY8-Pk-feI"/>
                 <outlet property="label" destination="B4q-9g-FE3" id="HJ9-fz-6MS"/>
+                <outlet property="titleLabel" destination="fRZ-ix-rZI" id="yJN-7B-ORY"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView simulatedAppContext="notificationCenter" translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="9ZT-qd-VZ2">
-                    <rect key="frame" x="12" y="12" width="56" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="9ZT-qd-VZ2" secondAttribute="height" multiplier="1:1" id="vci-cQ-7PV"/>
+                        <constraint firstAttribute="width" secondItem="9ZT-qd-VZ2" secondAttribute="height" multiplier="2:1" id="vci-cQ-7PV"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="gXu-dG-Vg5"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FSx-v0-abk">
-                    <rect key="frame" x="76" y="32" width="234" height="17"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="y1v-By-0V9" userLabel="CenteringView">
+                    <rect key="frame" x="159" y="20" width="1" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="alM-kv-U5y"/>
+                        <constraint firstAttribute="height" constant="1" id="b7O-9g-8id"/>
+                    </constraints>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FSx-v0-abk" userLabel="CountdownLabel">
+                    <rect key="frame" x="88" y="3" width="234" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="B4q-9g-FE3">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gdn-80-bDR" userLabel="TitleLabel">
+                    <rect key="frame" x="90" y="21" width="232" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="fRZ-ix-rZI">
+                        <font key="font" metaFont="systemSemibold" size="13"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="FSx-v0-abk" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="5Dx-og-XKW"/>
-                <constraint firstAttribute="trailing" secondItem="FSx-v0-abk" secondAttribute="trailing" constant="12" id="7q1-73-5pi"/>
+                <constraint firstAttribute="trailing" secondItem="FSx-v0-abk" secondAttribute="trailing" id="7q1-73-5pi"/>
                 <constraint firstItem="FSx-v0-abk" firstAttribute="leading" secondItem="9ZT-qd-VZ2" secondAttribute="trailing" constant="10" id="9ke-1x-bx2"/>
-                <constraint firstAttribute="height" constant="80" id="APF-Xr-eBH"/>
-                <constraint firstAttribute="bottom" secondItem="9ZT-qd-VZ2" secondAttribute="bottom" constant="12" id="U8f-ct-5El"/>
-                <constraint firstItem="9ZT-qd-VZ2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="12" id="nSl-2d-Bod"/>
-                <constraint firstItem="9ZT-qd-VZ2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="12" id="orD-5U-xdk"/>
+                <constraint firstAttribute="height" constant="40" id="APF-Xr-eBH"/>
+                <constraint firstItem="FSx-v0-abk" firstAttribute="top" secondItem="y1v-By-0V9" secondAttribute="bottom" id="CEa-4l-P1a"/>
+                <constraint firstAttribute="trailing" secondItem="gdn-80-bDR" secondAttribute="trailing" id="Ifp-qe-D0r"/>
+                <constraint firstItem="y1v-By-0V9" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="MQa-Xf-QWJ"/>
+                <constraint firstItem="y1v-By-0V9" firstAttribute="top" secondItem="gdn-80-bDR" secondAttribute="bottom" id="N1D-kJ-Xvd"/>
+                <constraint firstItem="y1v-By-0V9" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="PRd-zx-0d6"/>
+                <constraint firstAttribute="bottom" secondItem="9ZT-qd-VZ2" secondAttribute="bottom" id="U8f-ct-5El"/>
+                <constraint firstItem="gdn-80-bDR" firstAttribute="leading" secondItem="9ZT-qd-VZ2" secondAttribute="trailing" constant="12" id="czc-DK-CQy"/>
+                <constraint firstItem="9ZT-qd-VZ2" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="nSl-2d-Bod"/>
+                <constraint firstItem="9ZT-qd-VZ2" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="orD-5U-xdk"/>
             </constraints>
         </customView>
     </objects>

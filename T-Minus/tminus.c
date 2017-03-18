@@ -9,7 +9,10 @@
 #include "tminus.h"
 #include <limits.h>
 
+#define CURRENT_DB_VERSION 2
+
 typedef struct Database {
+    int version;
     Countdown rows[MAX_ROWS];
 } Database;
 
@@ -20,11 +23,18 @@ typedef struct Connection {
     int inMemory;
 } Connection;
 
+void Database_create(Connection *conn);
+
 void Database_load(Connection *conn)
 {
     size_t rc = fread(conn->db, sizeof(Database), 1, conn->file);
     
     if (rc != 1) printf("Error reading database! (%ld)\n", rc);
+    
+    if (conn->db->version != CURRENT_DB_VERSION) {
+        printf("DB is out of date, creating new one\n");
+        Database_create(conn);
+    }
 }
 
 void Database_close(Connection *conn)
@@ -67,6 +77,8 @@ void Database_createRow(Connection *conn, int row)
 void Database_create(Connection *conn)
 {
     int i = 0;
+    
+    conn->db->version = CURRENT_DB_VERSION;
     
     for (i = 0; i < MAX_ROWS; i++) {
         Database_createRow(conn, i);

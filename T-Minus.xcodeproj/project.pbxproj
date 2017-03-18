@@ -11,7 +11,7 @@
 		FA4C1C351E7D31DE009A2D59 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C341E7D31DE009A2D59 /* TodayViewController.m */; };
 		FA4C1C381E7D31DE009A2D59 /* TodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4C1C361E7D31DE009A2D59 /* TodayViewController.xib */; };
 		FA4C1C3C1E7D31DE009A2D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA4C1C3A1E7D31DE009A2D59 /* InfoPlist.strings */; };
-		FA4C1C3F1E7D31DE009A2D59 /* T-Minus.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FA4C1C3F1E7D31DE009A2D59 /* TodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FA4C1C2C1E7D31DE009A2D59 /* TodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA4C1C441E7D32DD009A2D59 /* tminus.c in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22A41E59F3E7005FCFF1 /* tminus.c */; };
 		FA4C1C471E7D3607009A2D59 /* TminusMacUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */; };
 		FA4C1C481E7D366E009A2D59 /* TminusMacUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */; };
@@ -60,7 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				FA4C1C3F1E7D31DE009A2D59 /* T-Minus.appex in Embed App Extensions */,
+				FA4C1C3F1E7D31DE009A2D59 /* TodayWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,7 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "T-Minus.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4C1C2C1E7D31DE009A2D59 /* TodayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4C1C2E1E7D31DE009A2D59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		FA4C1C321E7D31DE009A2D59 /* TodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidget.entitlements; sourceTree = "<group>"; };
 		FA4C1C331E7D31DE009A2D59 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				FA6A22701E59F317005FCFF1 /* T-Minus.app */,
 				FA6A22861E59F317005FCFF1 /* T-MinusTests.xctest */,
 				FA6A22911E59F317005FCFF1 /* T-MinusUITests.xctest */,
-				FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */,
+				FA4C1C2C1E7D31DE009A2D59 /* TodayWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,9 +262,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */ = {
+		FA4C1C2B1E7D31DE009A2D59 /* TodayWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "T-Minus Today Widget" */;
+			buildConfigurationList = FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "TodayWidget" */;
 			buildPhases = (
 				FA4C1C281E7D31DE009A2D59 /* Sources */,
 				FA4C1C291E7D31DE009A2D59 /* Frameworks */,
@@ -274,9 +274,9 @@
 			);
 			dependencies = (
 			);
-			name = "T-Minus Today Widget";
+			name = TodayWidget;
 			productName = TodayWidget;
-			productReference = FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */;
+			productReference = FA4C1C2C1E7D31DE009A2D59 /* TodayWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		FA6A226F1E59F317005FCFF1 /* T-Minus */ = {
@@ -392,7 +392,7 @@
 				FA6A226F1E59F317005FCFF1 /* T-Minus */,
 				FA6A22851E59F317005FCFF1 /* T-MinusTests */,
 				FA6A22901E59F317005FCFF1 /* T-MinusUITests */,
-				FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */,
+				FA4C1C2B1E7D31DE009A2D59 /* TodayWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -480,7 +480,7 @@
 /* Begin PBXTargetDependency section */
 		FA4C1C3E1E7D31DE009A2D59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */;
+			target = FA4C1C2B1E7D31DE009A2D59 /* TodayWidget */;
 			targetProxy = FA4C1C3D1E7D31DE009A2D59 /* PBXContainerItemProxy */;
 		};
 		FA6A22881E59F317005FCFF1 /* PBXTargetDependency */ = {
@@ -531,7 +531,7 @@
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
-				PRODUCT_NAME = "T-Minus";
+				PRODUCT_NAME = TodayWidget;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -544,7 +544,7 @@
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
-				PRODUCT_NAME = "T-Minus";
+				PRODUCT_NAME = TodayWidget;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -719,7 +719,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "T-Minus Today Widget" */ = {
+		FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "TodayWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA4C1C401E7D31DE009A2D59 /* Debug */,
