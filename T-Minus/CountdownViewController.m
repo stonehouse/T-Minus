@@ -46,7 +46,7 @@
         }
         
     }
-    
+
 }
 
 - (void)viewDidAppear
@@ -94,6 +94,10 @@
 
 - (void)setupCountdownTimer
 {
+    NSWindowController *windowController = self.view.window.windowController;
+    // Name frame based on countdown id, persist window position
+    windowController.windowFrameAutosaveName = [NSString stringWithFormat:@"%d", self.ctdn->index];
+    
     if (strlen(self.ctdn->title) > 0) {
         NSString *title = [NSString stringWithUTF8String:self.ctdn->title];
         self.view.window.title = title;
