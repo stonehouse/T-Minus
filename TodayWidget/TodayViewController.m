@@ -38,8 +38,6 @@
     if (self.ctdn) {
         if (strlen(self.ctdn->title) > 0) {
             self.titleLabel.stringValue = [NSString stringWithUTF8String:self.ctdn->title];
-        } else {
-            self.titleLabel.stringValue = @"T-Minus";
         }
         
         self.image.image = [TminusMacUtils imageForCountdown:self.ctdn];
