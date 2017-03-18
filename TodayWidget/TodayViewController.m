@@ -26,13 +26,14 @@
 @implementation TodayViewController
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult result))completionHandler {
-    if (self.conn) {
-        [self.timer invalidate];
-    } else {
+    if (!self.conn) {
         self.conn = [TminusMacUtils defaultConnection];
     }
-
     
+    if (self.timer) {
+        [self.timer invalidate];
+    }
+
     self.ctdn = Countdown_getMostUrgent(self.conn);
     
     if (self.ctdn) {
@@ -48,7 +49,7 @@
         self.image.image = nil;
         self.label.stringValue = NSLocalizedString(@"Nothing to see here", nil);
         completionHandler(NCUpdateResultNoData);
-    }
+    }    
 }
 
 - (void)updateTimer

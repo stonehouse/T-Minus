@@ -161,7 +161,6 @@ Countdown* Countdown_getMostUrgent(Connection *conn)
         if (ctdn) {
             if (ctdn->deadline < mostUrgent) {
                 mostUrgent = ctdn->deadline;
-                printf("URGENT %ld %ld\n", ctdn->deadline, mostUrgent);
                 mostUrgentIndex = i;
             }
         }
