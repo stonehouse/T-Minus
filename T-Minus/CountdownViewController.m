@@ -81,6 +81,7 @@
     self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm.description];
     
     if (tm.difference == 10) {
+        // With 10 seconds to go, pop to the foreground
         [NSApp activateIgnoringOtherApps:YES];
     }
     
