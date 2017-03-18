@@ -7,6 +7,7 @@
 //
 
 #import "CreateCountdownViewController.h"
+#import "TminusMacUtils.h"
 
 @interface CreateCountdownViewController ()
 
@@ -36,7 +37,7 @@
     
     if ([panel runModal] == NSFileHandlingPanelOKButton) {
         NSURL *bgURL = panel.URLs.firstObject;
-        self.backgroundPath = bgURL.absoluteString;
+        self.backgroundPath = bgURL.path;
     }
 }
 
@@ -46,7 +47,16 @@
     const char *title = self.titleTextField.stringValue.UTF8String;
     const char *bgPath = NULL;
     if (self.backgroundPath) {
-        bgPath = self.backgroundPath.UTF8String;
+        NSArray<NSString*> *components = [self.backgroundPath componentsSeparatedByString:@"."];
+        NSString *extension = @".unknown";
+        if (components.count > 1) {
+            extension = [@"." stringByAppendingString:components.lastObject];
+        }
+        NSString *fileName = [[NSUUID UUID].UUIDString stringByAppendingString:extension];
+        NSURL *backgroundsFolder = [TminusMacUtils backgroundsFolder];
+        NSString *backgroundFile = [backgroundsFolder URLByAppendingPathComponent:fileName].path;
+        [[NSFileManager defaultManager] copyItemAtPath:self.backgroundPath toPath:backgroundFile error:nil];
+        bgPath = backgroundFile.UTF8String;
     }
     
     self.ctdn = Countdown_createWithTimestamp(self.conn, title, deadline, bgPath);

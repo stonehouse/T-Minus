@@ -50,7 +50,10 @@ void Database_close(Connection *conn);
 
 time_t createTimestamp(int year, int month, int day, int hour, int minute);
 int Countdown_count(Connection *conn);
+
 Countdown* Countdown_get(Connection *conn);
+Countdown* Countdown_getMostUrgent(Connection *conn);
+
 Countdown* Countdown_create(Connection *conn);
 Countdown* Countdown_createWithTimestamp(Connection *conn, const char *title, time_t deadline, const char *bgPath);
 void Countdown_save(Connection *conn, Countdown *ctdn);

@@ -19,7 +19,7 @@
 
 - (void)setBackgroundPath:(NSString *)backgroundPath
 {
-    NSURL *bgURL = [NSURL URLWithString:backgroundPath];
+    NSURL *bgURL = [NSURL fileURLWithPath:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
     [self adjustTextColor];
 }

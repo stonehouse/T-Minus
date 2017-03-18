@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CountdownViewController.h"
+#import "TminusMacUtils.h"
 
 @interface AppDelegate ()
 
@@ -36,17 +37,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    
 }
 
 - (void)setupConnection {
-    #if DEBUG
-    self.connection = Database_openInMemory();
-    #else
-    NSString *storagePath = NSHomeDirectory();
-    NSString *db = [storagePath stringByAppendingString:@"/.tminus.db"];
-    self.connection = Database_open(db.UTF8String);
-    #endif
+    self.connection = [TminusMacUtils defaultConnection];
 }
 
 

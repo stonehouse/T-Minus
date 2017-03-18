@@ -7,6 +7,7 @@
 //
 
 #include "tminus.h"
+#include <limits.h>
 
 typedef struct Database {
     Countdown rows[MAX_ROWS];
@@ -23,7 +24,7 @@ void Database_load(Connection *conn)
 {
     size_t rc = fread(conn->db, sizeof(Database), 1, conn->file);
     
-    if (rc != 1) printf("Error reading database!\n");
+    if (rc != 1) printf("Error reading database! (%ld)\n", rc);
 }
 
 void Database_close(Connection *conn)
@@ -92,6 +93,12 @@ Connection* Database_open(const char *filename)
         Database_create(conn);
     }
     
+    if (!conn->file) {
+        Database_close(conn);
+        printf("Creating in memory DB\n");
+        return Database_openInMemory();
+    }
+    
     return conn;
 }
 
@@ -128,6 +135,25 @@ Countdown* Countdown_get(Connection *conn)
     }
     
     return NULL;
+}
+
+Countdown* Countdown_getMostUrgent(Connection *conn)
+{
+    int i;
+    int mostUrgentIndex = 0;
+    int mostUrgent = INT_MAX;
+    Countdown *ctdn;
+    
+    for (i = 0; i < MAX_ROWS; i++) {
+        ctdn = Countdown_getIndex(conn, i);
+        if (ctdn) {
+            if (ctdn->deadline < mostUrgent) {
+                mostUrgentIndex = i;
+            }
+        }
+    }
+    
+    return Countdown_getIndex(conn, mostUrgentIndex);
 }
 
 Countdown* Countdown_create(Connection *conn)
@@ -259,7 +285,10 @@ int Countdown_count(Connection *conn)
     int count = 0;
     
     for (i = 0; i < MAX_ROWS; i++) {
-        if (conn->db->rows[i].deadline != 0) {
+        Countdown ctdn = conn->db->rows[i];
+        long diff = difftime(ctdn.deadline, time(NULL));
+        
+        if (ctdn.deadline != 0 && diff > 0) {
             count++;
         }
     }

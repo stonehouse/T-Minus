@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA4C1C2F1E7D31DE009A2D59 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4C1C2E1E7D31DE009A2D59 /* NotificationCenter.framework */; };
+		FA4C1C351E7D31DE009A2D59 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C341E7D31DE009A2D59 /* TodayViewController.m */; };
+		FA4C1C381E7D31DE009A2D59 /* TodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4C1C361E7D31DE009A2D59 /* TodayViewController.xib */; };
+		FA4C1C3C1E7D31DE009A2D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA4C1C3A1E7D31DE009A2D59 /* InfoPlist.strings */; };
+		FA4C1C3F1E7D31DE009A2D59 /* T-Minus.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FA4C1C441E7D32DD009A2D59 /* tminus.c in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22A41E59F3E7005FCFF1 /* tminus.c */; };
+		FA4C1C471E7D3607009A2D59 /* TminusMacUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */; };
+		FA4C1C481E7D366E009A2D59 /* TminusMacUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */; };
 		FA6A22751E59F317005FCFF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22741E59F317005FCFF1 /* AppDelegate.m */; };
 		FA6A22781E59F317005FCFF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A22771E59F317005FCFF1 /* main.m */; };
 		FA6A227B1E59F317005FCFF1 /* CountdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6A227A1E59F317005FCFF1 /* CountdownViewController.m */; };
@@ -22,6 +30,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FA4C1C3D1E7D31DE009A2D59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA6A22681E59F317005FCFF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA4C1C2B1E7D31DE009A2D59;
+			remoteInfo = TodayWidget;
+		};
 		FA6A22871E59F317005FCFF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA6A22681E59F317005FCFF1 /* Project object */;
@@ -38,7 +53,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA4C1C431E7D31DE009A2D59 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FA4C1C3F1E7D31DE009A2D59 /* T-Minus.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "T-Minus.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4C1C2E1E7D31DE009A2D59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		FA4C1C321E7D31DE009A2D59 /* TodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidget.entitlements; sourceTree = "<group>"; };
+		FA4C1C331E7D31DE009A2D59 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		FA4C1C341E7D31DE009A2D59 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		FA4C1C371E7D31DE009A2D59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TodayViewController.xib; sourceTree = "<group>"; };
+		FA4C1C391E7D31DE009A2D59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA4C1C3B1E7D31DE009A2D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FA4C1C451E7D3607009A2D59 /* TminusMacUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TminusMacUtils.h; sourceTree = "<group>"; };
+		FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TminusMacUtils.m; sourceTree = "<group>"; };
+		FA4C1C491E7D3B76009A2D59 /* T-Minus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "T-Minus.entitlements"; sourceTree = "<group>"; };
 		FA6A22701E59F317005FCFF1 /* T-Minus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T-Minus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6A22731E59F317005FCFF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA6A22741E59F317005FCFF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -66,6 +106,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FA4C1C291E7D31DE009A2D59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4C1C2F1E7D31DE009A2D59 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA6A226D1E59F317005FCFF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,12 +138,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA4C1C2D1E7D31DE009A2D59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA4C1C2E1E7D31DE009A2D59 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA4C1C301E7D31DE009A2D59 /* TodayWidget */ = {
+			isa = PBXGroup;
+			children = (
+				FA4C1C331E7D31DE009A2D59 /* TodayViewController.h */,
+				FA4C1C341E7D31DE009A2D59 /* TodayViewController.m */,
+				FA4C1C361E7D31DE009A2D59 /* TodayViewController.xib */,
+				FA4C1C391E7D31DE009A2D59 /* Info.plist */,
+				FA4C1C3A1E7D31DE009A2D59 /* InfoPlist.strings */,
+				FA4C1C311E7D31DE009A2D59 /* Supporting Files */,
+			);
+			path = TodayWidget;
+			sourceTree = "<group>";
+		};
+		FA4C1C311E7D31DE009A2D59 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA4C1C321E7D31DE009A2D59 /* TodayWidget.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		FA6A22671E59F317005FCFF1 = {
 			isa = PBXGroup;
 			children = (
 				FA6A22721E59F317005FCFF1 /* T-Minus */,
 				FA6A22891E59F317005FCFF1 /* T-MinusTests */,
 				FA6A22941E59F317005FCFF1 /* T-MinusUITests */,
+				FA4C1C301E7D31DE009A2D59 /* TodayWidget */,
+				FA4C1C2D1E7D31DE009A2D59 /* Frameworks */,
 				FA6A22711E59F317005FCFF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +185,7 @@
 				FA6A22701E59F317005FCFF1 /* T-Minus.app */,
 				FA6A22861E59F317005FCFF1 /* T-MinusTests.xctest */,
 				FA6A22911E59F317005FCFF1 /* T-MinusUITests.xctest */,
+				FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +193,7 @@
 		FA6A22721E59F317005FCFF1 /* T-Minus */ = {
 			isa = PBXGroup;
 			children = (
+				FA4C1C491E7D3B76009A2D59 /* T-Minus.entitlements */,
 				FA6BE4071E64AAA3005D85CF /* Utilities */,
 				FA6A22A31E59F3D2005FCFF1 /* Core */,
 				FA6A22731E59F317005FCFF1 /* AppDelegate.h */,
@@ -136,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				FA6A22771E59F317005FCFF1 /* main.m */,
+				FA4C1C451E7D3607009A2D59 /* TminusMacUtils.h */,
+				FA4C1C461E7D3607009A2D59 /* TminusMacUtils.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -179,6 +262,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "T-Minus Today Widget" */;
+			buildPhases = (
+				FA4C1C281E7D31DE009A2D59 /* Sources */,
+				FA4C1C291E7D31DE009A2D59 /* Frameworks */,
+				FA4C1C2A1E7D31DE009A2D59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "T-Minus Today Widget";
+			productName = TodayWidget;
+			productReference = FA4C1C2C1E7D31DE009A2D59 /* T-Minus.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FA6A226F1E59F317005FCFF1 /* T-Minus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA6A229A1E59F317005FCFF1 /* Build configuration list for PBXNativeTarget "T-Minus" */;
@@ -186,10 +286,12 @@
 				FA6A226C1E59F317005FCFF1 /* Sources */,
 				FA6A226D1E59F317005FCFF1 /* Frameworks */,
 				FA6A226E1E59F317005FCFF1 /* Resources */,
+				FA4C1C431E7D31DE009A2D59 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FA4C1C3E1E7D31DE009A2D59 /* PBXTargetDependency */,
 			);
 			name = "T-Minus";
 			productName = "T-Minus";
@@ -241,9 +343,26 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Alexander Stonehouse";
 				TargetAttributes = {
+					FA4C1C2B1E7D31DE009A2D59 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
 					FA6A226F1E59F317005FCFF1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					FA6A22851E59F317005FCFF1 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -273,11 +392,21 @@
 				FA6A226F1E59F317005FCFF1 /* T-Minus */,
 				FA6A22851E59F317005FCFF1 /* T-MinusTests */,
 				FA6A22901E59F317005FCFF1 /* T-MinusUITests */,
+				FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FA4C1C2A1E7D31DE009A2D59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4C1C381E7D31DE009A2D59 /* TodayViewController.xib in Resources */,
+				FA4C1C3C1E7D31DE009A2D59 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA6A226E1E59F317005FCFF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +434,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FA4C1C281E7D31DE009A2D59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA4C1C481E7D366E009A2D59 /* TminusMacUtils.m in Sources */,
+				FA4C1C351E7D31DE009A2D59 /* TodayViewController.m in Sources */,
+				FA4C1C441E7D32DD009A2D59 /* tminus.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA6A226C1E59F317005FCFF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,6 +453,7 @@
 				FA6A22A61E59F3E7005FCFF1 /* tminus.c in Sources */,
 				FA6BE4061E632B2D005D85CF /* CountdownView.m in Sources */,
 				FA6A22781E59F317005FCFF1 /* main.m in Sources */,
+				FA4C1C471E7D3607009A2D59 /* TminusMacUtils.m in Sources */,
 				FA6BE4011E6320D3005D85CF /* CreateCountdownViewController.m in Sources */,
 				FA6A22751E59F317005FCFF1 /* AppDelegate.m in Sources */,
 			);
@@ -338,6 +478,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FA4C1C3E1E7D31DE009A2D59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA4C1C2B1E7D31DE009A2D59 /* T-Minus Today Widget */;
+			targetProxy = FA4C1C3D1E7D31DE009A2D59 /* PBXContainerItemProxy */;
+		};
 		FA6A22881E59F317005FCFF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA6A226F1E59F317005FCFF1 /* T-Minus */;
@@ -351,6 +496,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FA4C1C361E7D31DE009A2D59 /* TodayViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA4C1C371E7D31DE009A2D59 /* Base */,
+			);
+			name = TodayViewController.xib;
+			sourceTree = "<group>";
+		};
+		FA4C1C3A1E7D31DE009A2D59 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA4C1C3B1E7D31DE009A2D59 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		FA6A227E1E59F317005FCFF1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -362,6 +523,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FA4C1C401E7D31DE009A2D59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
+				PRODUCT_NAME = "T-Minus";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FA4C1C411E7D31DE009A2D59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = TodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
+				PRODUCT_NAME = "T-Minus";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		FA6A22981E59F317005FCFF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -453,7 +640,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = "T-Minus/T-Minus.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "T-Minus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -466,6 +654,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "T-Minus/T-Minus.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "T-Minus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -529,6 +719,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FA4C1C421E7D31DE009A2D59 /* Build configuration list for PBXNativeTarget "T-Minus Today Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA4C1C401E7D31DE009A2D59 /* Debug */,
+				FA4C1C411E7D31DE009A2D59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA6A226B1E59F317005FCFF1 /* Build configuration list for PBXProject "T-Minus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
