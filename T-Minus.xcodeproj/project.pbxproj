@@ -345,6 +345,7 @@
 				TargetAttributes = {
 					FA4C1C2B1E7D31DE009A2D59 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 84G73GMHBW;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -354,6 +355,7 @@
 					};
 					FA6A226F1E59F317005FCFF1 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 84G73GMHBW;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -366,6 +368,7 @@
 					};
 					FA6A22851E59F317005FCFF1 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 84G73GMHBW;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FA6A226F1E59F317005FCFF1;
 					};
@@ -527,7 +530,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
@@ -540,7 +545,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = TodayWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus.TodayWidget";
@@ -641,10 +648,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "T-Minus/T-Minus.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = "T-Minus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -655,10 +664,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "T-Minus/T-Minus.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = "T-Minus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-Minus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -668,8 +679,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = "T-MinusTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-MinusTests";
@@ -682,8 +694,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 84G73GMHBW;
 				INFOPLIST_FILE = "T-MinusTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EgoSapien.T-MinusTests";

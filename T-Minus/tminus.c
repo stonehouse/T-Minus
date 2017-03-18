@@ -153,13 +153,15 @@ Countdown* Countdown_getMostUrgent(Connection *conn)
 {
     int i;
     int mostUrgentIndex = 0;
-    int mostUrgent = INT_MAX;
+    long mostUrgent = LONG_MAX;
     Countdown *ctdn;
     
     for (i = 0; i < MAX_ROWS; i++) {
         ctdn = Countdown_getIndex(conn, i);
         if (ctdn) {
             if (ctdn->deadline < mostUrgent) {
+                mostUrgent = ctdn->deadline;
+                printf("URGENT %ld %ld\n", ctdn->deadline, mostUrgent);
                 mostUrgentIndex = i;
             }
         }

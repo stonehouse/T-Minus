@@ -51,6 +51,28 @@
     Countdown_destroy(ctdn);
 }
 
+- (void)testGetMostUrgent {
+    time_t now = time(NULL);
+    
+    Countdown* ctdnNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Not so urgent countdown", now+9000, NULL);
+    Countdown_save(self.conn, ctdnNotSoUrgent);
+    Countdown* ctdnUrgent = Countdown_createWithTimestamp(self.conn, "Urgent countdown", now+10, NULL);
+    Countdown_save(self.conn, ctdnUrgent);
+    Countdown* ctdnOtherNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Other not so urgent countdown", now+5000, NULL);
+    Countdown_save(self.conn, ctdnOtherNotSoUrgent);
+    
+    Countdown *ctdn = Countdown_getMostUrgent(self.conn);
+    
+    XCTAssertEqual(ctdn->index, ctdnUrgent->index);
+    XCTAssertEqual(ctdn->deadline, ctdnUrgent->deadline);
+    XCTAssertTrue(strcmp(ctdn->title, ctdnUrgent->title) == 0, @"%s != %s", ctdn->title, ctdnUrgent->title);
+    
+    Countdown_destroy(ctdn);
+    Countdown_destroy(ctdnNotSoUrgent);
+    Countdown_destroy(ctdnUrgent);
+    Countdown_destroy(ctdnOtherNotSoUrgent);
+}
+
 - (void)testCreateCountdown {
     int i;
     Countdown *ctdns[MAX_ROWS];
