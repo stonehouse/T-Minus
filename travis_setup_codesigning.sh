@@ -1,6 +1,6 @@
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     echo "Preparing Code Signing certificate"
-    $KEYCHAIN_PASSWORD=gsOX#$eZ#xPZYRTNSst9
+    $KEYCHAIN_PASSWORD="gsOX#$eZ#xPZYRTNSst9"
     export CERTIFICATE_P12=Certificate.p12;
     echo $SIGNING_CERTIFICATE | base64 — decode > $CERTIFICATE_P12;
     echo "Decoded p12"
