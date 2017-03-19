@@ -3,7 +3,7 @@
 
 A Simple Countdown App For the Mac
 
-<img align="center" src="https://github.com/egosapien/T-Minus/blob/master/T-Minus/Assets.xcassets/AppIcon.appiconset/t-%20copy-1.png">
+![](https://github.com/egosapien/T-Minus/blob/master/T-Minus/Assets.xcassets/AppIcon.appiconset/t-%20copy-5.png)
 
 Includes today widget, and allows for tracking up to 10 deadlines. Very simple app, mainly created it because I didn't find any simillar apps that I liked.
 
