@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alexander Stonehouse. All rights reserved.
 //
 
-import Cocoa
+import UIKit
 
 class CreateCountdownViewController: UIViewController {
 
