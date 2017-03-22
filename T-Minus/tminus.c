@@ -114,13 +114,38 @@ Connection* Database_open(const char *filename)
     return conn;
 }
 
+
+int Countdown_cleanUpBackgroundFile(Countdown ctdn)
+{
+    char *bgPath = ctdn.background;
+    FILE *file = fopen(bgPath, "r");
+    if (file) {
+        fclose(file);
+        int rc = remove(bgPath);
+        if (rc != 0) {
+            printf("Error(%d) cleaning up background file at path '%s'", rc, bgPath);
+            return 0;
+        } else {
+            printf("Background file cleaned up successfully");
+        }
+    }
+    
+    return 1;
+}
+
 Countdown* Countdown_getIndex(Connection *conn, int index)
 {
     Countdown ctdn = conn->db->rows[index];
     
     long diff = difftime(ctdn.deadline, time(NULL));
     
-    if (ctdn.deadline == 0 || diff <= 0) {
+    if (ctdn.deadline == 0) {
+        // Empty DB row
+        return NULL;
+    } else if (diff <= 0) {
+        // Countdown exceeded, clean up and empty row
+        Countdown_cleanUpBackgroundFile(ctdn);
+        Database_createRow(conn, index);
         return NULL;
     } else {
         Countdown *ptr = malloc(sizeof(Countdown));
