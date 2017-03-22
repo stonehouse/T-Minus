@@ -16,7 +16,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                     <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ctI-ay-bQB"/>
                 </imageView>
-                <visualEffectView appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="i9L-1Z-VOl">
+                <visualEffectView appearanceType="vibrantDark" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="i9L-1Z-VOl">
                     <rect key="frame" x="20" y="85" width="400" height="100"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Qgn-xA-33d">
@@ -37,7 +37,7 @@
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="400" id="EIU-VK-VpZ"/>
+                        <constraint firstAttribute="width" priority="750" constant="400" id="EIU-VK-VpZ"/>
                         <constraint firstItem="Qgn-xA-33d" firstAttribute="leading" secondItem="i9L-1Z-VOl" secondAttribute="leading" constant="10" id="MNe-SI-H1A"/>
                         <constraint firstItem="eDC-9b-xG6" firstAttribute="leading" secondItem="Qgn-xA-33d" secondAttribute="leading" id="XwH-hJ-0Wy"/>
                         <constraint firstAttribute="height" constant="100" id="ZlA-87-daY"/>
@@ -52,12 +52,14 @@
                 <constraint firstAttribute="trailing" secondItem="AuJ-Iz-O21" secondAttribute="trailing" id="NXh-DA-dCf"/>
                 <constraint firstAttribute="bottom" secondItem="AuJ-Iz-O21" secondAttribute="bottom" id="OHH-aj-Fpf"/>
                 <constraint firstItem="AuJ-Iz-O21" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="UyQ-WV-qUW"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i9L-1Z-VOl" secondAttribute="trailing" constant="20" id="mJK-Ep-xZk"/>
                 <constraint firstItem="AuJ-Iz-O21" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="zl7-Zs-Gyz"/>
             </constraints>
             <connections>
                 <outlet property="backgroundView" destination="AuJ-Iz-O21" id="lOS-yD-zH0"/>
                 <outlet property="countdownLabel" destination="hPX-lE-mos" id="MIJ-nK-sTQ"/>
                 <outlet property="countdownTitleLabel" destination="jp5-zh-A1C" id="0LD-xZ-G9h"/>
+                <outlet property="heightConstraint" destination="ZlA-87-daY" id="BGW-8B-JLT"/>
                 <outlet property="visualEffectView" destination="i9L-1Z-VOl" id="FhV-sY-YEJ"/>
                 <outlet property="widthConstraint" destination="EIU-VK-VpZ" id="LJm-Eo-fHd"/>
             </connections>

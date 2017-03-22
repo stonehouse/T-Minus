@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSTextFieldCell *countdownTitleLabel;
 @property (weak) IBOutlet NSVisualEffectView *visualEffectView;
 @property (weak) IBOutlet NSLayoutConstraint *widthConstraint;
+@property (weak) IBOutlet NSLayoutConstraint *heightConstraint;
 
 @end
 
@@ -27,15 +28,19 @@
     self.visualEffectView.layer.cornerRadius = 5.0f;
 }
 
-- (void)setDescription:(NSString *)description
+- (void)setCountdownDescription:(NSString *)countdownDescription
 {
-    self.countdownLabel.stringValue = description;
+    self.countdownLabel.stringValue = countdownDescription;
     CGFloat currentWidth = self.widthConstraint.constant;
     CGFloat defaultPadding = 20;
     CGFloat desiredWidth = [self.countdownLabel cellSize].width + defaultPadding;
     CGFloat diff = currentWidth - desiredWidth;
     if (diff < 0 || diff > 40) {
-        self.widthConstraint.constant = desiredWidth + defaultPadding;
+        if (desiredWidth > self.frame.size.width + defaultPadding) {
+            self.widthConstraint.constant = self.frame.size.width - defaultPadding;
+        } else {
+            self.widthConstraint.constant = desiredWidth;
+        }
         [self setNeedsUpdateConstraints:YES];
     }
 }
@@ -46,13 +51,6 @@
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
     self.countdownLabel.textColor = [NSColor whiteColor];
     self.countdownTitleLabel.textColor = [NSColor whiteColor];
-}
-
-- (void)adjustTextColor
-{
-    CGRect sectionCountdown = [self convertRect:self.countdownLabel.controlView.frame toView:self.backgroundView];
-    self.countdownLabel.textColor = [self.backgroundView idealTextColorForSection:sectionCountdown];
-    self.countdownTitleLabel.textColor = [self.countdownLabel.textColor copy];
 }
 
 @end

@@ -10,10 +10,8 @@
 
 @interface CountdownView : NSView
 
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *countdownDescription;
 @property (nonatomic, strong) NSString *backgroundPath;
 @property (weak) IBOutlet NSImageView *backgroundView;
-
-- (void)adjustTextColor;
 
 @end
