@@ -30,10 +30,27 @@
         self.conn = [TminusMacUtils defaultConnection];
     }
     
+    if ([self checkMostUrgentCountdown]) {
+        completionHandler(NCUpdateResultNewData);
+    } else {
+        completionHandler(NCUpdateResultNoData);
+    }
+}
+
+- (BOOL)checkMostUrgentCountdown
+{
+    BOOL hadRunningCountdown = NO;
+    
+    if (self.ctdn) {
+        hadRunningCountdown = YES;
+        // Countdown just finished, so leave what was just displayed
+        Countdown_destroy(self.ctdn);
+    }
+    
     if (self.timer) {
         [self.timer invalidate];
     }
-
+    
     self.ctdn = Countdown_getMostUrgent(self.conn);
     
     if (self.ctdn) {
@@ -44,20 +61,26 @@
         self.image.image = [TminusMacUtils imageForCountdown:self.ctdn];
         [self updateTimer];
         [self setupTimer];
-        completionHandler(NCUpdateResultNewData);
-    } else {
+        return YES;
+    } else if (!hadRunningCountdown) {
+        // No running countdown, nothing to do
         self.image.image = nil;
         self.label.stringValue = NSLocalizedString(@"Nothing to see here", nil);
-        completionHandler(NCUpdateResultNoData);
-    }    
+    }
+    
+    return NO;
 }
 
 - (void)updateTimer
 {
     if (self.ctdn) {
         Tminus tm = Countdown_tminus(self.ctdn);
-        
         self.label.stringValue = [NSString stringWithUTF8String:tm.description];
+        
+        // Countdown over, need to check for another one
+        if (tm.finished == 1) {
+            [self checkMostUrgentCountdown];
+        }
     }
 }
 
