@@ -26,15 +26,31 @@
 @implementation TodayViewController
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult result))completionHandler {
-    if (!self.conn) {
-        self.conn = [TminusMacUtils defaultConnection];
-    }
+    [self updateConnection];
+    
+    NSClickGestureRecognizer *clickRecognizer = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(clickedTodayWidget)];
+    [self.view addGestureRecognizer:clickRecognizer];
     
     if ([self checkMostUrgentCountdown]) {
         completionHandler(NCUpdateResultNewData);
     } else {
         completionHandler(NCUpdateResultNoData);
     }
+}
+
+- (void)clickedTodayWidget
+{
+    [self updateConnection];
+    [self checkMostUrgentCountdown];
+}
+
+- (void)updateConnection
+{
+    if (self.conn) {
+        Database_close(self.conn);
+    }
+    
+    self.conn = [TminusMacUtils defaultConnection];
 }
 
 - (BOOL)checkMostUrgentCountdown
