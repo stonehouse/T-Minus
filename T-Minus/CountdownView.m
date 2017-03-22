@@ -11,17 +11,41 @@
 
 @interface CountdownView()
 
+@property (weak) IBOutlet NSTextFieldCell *countdownLabel;
 @property (weak) IBOutlet NSTextFieldCell *countdownTitleLabel;
+@property (weak) IBOutlet NSVisualEffectView *visualEffectView;
+@property (weak) IBOutlet NSLayoutConstraint *widthConstraint;
 
 @end
 
 @implementation CountdownView
 
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.visualEffectView.layer.cornerRadius = 5.0f;
+}
+
+- (void)setDescription:(NSString *)description
+{
+    self.countdownLabel.stringValue = description;
+    CGFloat currentWidth = self.widthConstraint.constant;
+    CGFloat defaultPadding = 20;
+    CGFloat desiredWidth = [self.countdownLabel cellSize].width + defaultPadding;
+    CGFloat diff = currentWidth - desiredWidth;
+    if (diff < 0 || diff > 40) {
+        self.widthConstraint.constant = desiredWidth + defaultPadding;
+        [self setNeedsUpdateConstraints:YES];
+    }
+}
+
 - (void)setBackgroundPath:(NSString *)backgroundPath
 {
     NSURL *bgURL = [NSURL fileURLWithPath:backgroundPath];
     self.backgroundView.image = [[NSImage alloc] initWithContentsOfURL:bgURL];
-    [self adjustTextColor];
+    self.countdownLabel.textColor = [NSColor whiteColor];
+    self.countdownTitleLabel.textColor = [NSColor whiteColor];
 }
 
 - (void)adjustTextColor

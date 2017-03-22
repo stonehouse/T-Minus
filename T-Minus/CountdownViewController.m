@@ -62,7 +62,7 @@
 
 - (void)windowDidResize:(NSNotification *)notification
 {
-    [self.countdownView adjustTextColor];
+
 }
 
 
@@ -78,7 +78,7 @@
     
     Tminus tm = Countdown_tminus(self.ctdn);
     
-    self.countdownView.countdownLabel.stringValue = [NSString stringWithUTF8String:tm.description];
+    self.countdownView.description = [NSString stringWithUTF8String:tm.description];
     
     if (tm.difference == 10) {
         // With 10 seconds to go, pop to the foreground
@@ -149,7 +149,7 @@
 
 - (void)createCountdown
 {
-    self.countdownView.countdownLabel.stringValue = @"";
+    self.countdownView.description = @"";
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     NSWindowController *vc = [storyboard instantiateControllerWithIdentifier:@"createCountdown"];
     
