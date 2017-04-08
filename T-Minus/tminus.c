@@ -41,11 +41,14 @@ void Database_close(Connection *conn)
 {
     if (conn) {
         if (conn->file) {
+            printf("Closing file\n");
             fclose(conn->file);
         }
         if(conn->db) {
+            printf("Freeing DB\n");
             free(conn->db);
         }
+        printf("Freeing Connection\n");
         free(conn);
     }
 }
@@ -76,6 +79,7 @@ void Database_createRow(Connection *conn, int row)
 
 void Database_create(Connection *conn)
 {
+    printf("Creating database\n");
     int i = 0;
     
     conn->db->version = CURRENT_DB_VERSION;
@@ -83,6 +87,7 @@ void Database_create(Connection *conn)
     for (i = 0; i < MAX_ROWS; i++) {
         Database_createRow(conn, i);
     }
+    printf("Database rows initialised\n");
 }
 
 Connection* Database_open(const char *filename)
@@ -337,7 +342,9 @@ int Countdown_count(Connection *conn)
 
 void Countdown_destroy(Countdown *countdown)
 {
+    printf("Freeing countdown\n");
     free(countdown);
+    printf("Countdown freed\n");
 }
 
 // Test helpers
