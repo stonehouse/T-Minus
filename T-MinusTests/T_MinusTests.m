@@ -19,13 +19,13 @@
 
 - (void)setUp
 {
-    setenv("TZ", "Europe/Berlin", 1);
-    self.conn = Database_openInMemory();
+    //setenv("TZ", "Europe/Berlin", 1);
+    //self.conn = Database_openInMemory();
 }
 
 - (void)tearDown
 {
-    Database_close(self.conn);
+    //Database_close(self.conn);
 }
 
 - (void)testTests
