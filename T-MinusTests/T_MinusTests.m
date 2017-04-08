@@ -120,19 +120,19 @@
 //        Countdown_destroy(ctdn);
 //    }
 //}
-//
-//- (void)verifyTminus:(Tminus)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
-//    XCTAssertEqual(finished, tm.finished, "Finished does not match expected");
-//    XCTAssertEqual(days, tm.days, @"Days does not match expected");
-//    XCTAssertEqual(hours, tm.hours, @"Hours does not match expected");
-//    XCTAssertEqual(minutes, tm.minutes, @"Minutes does not match expected");
-//    XCTAssertEqual(seconds, tm.seconds, @"Seconds does not match expected");
-//    if (description) {
-//        NSString *expected = [NSString stringWithUTF8String:description];
-//        NSString *string = [NSString stringWithUTF8String:tm.description];
-//        XCTAssertTrue(strcmp(tm.description, description) == 0, @"%@ != %@", expected, string);
-//    }
-//}
+
+- (void)verifyTminus:(Tminus)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
+    XCTAssertEqual(finished, tm.finished, "Finished does not match expected");
+    XCTAssertEqual(days, tm.days, @"Days does not match expected");
+    XCTAssertEqual(hours, tm.hours, @"Hours does not match expected");
+    XCTAssertEqual(minutes, tm.minutes, @"Minutes does not match expected");
+    XCTAssertEqual(seconds, tm.seconds, @"Seconds does not match expected");
+    if (description) {
+        NSString *expected = [NSString stringWithUTF8String:description];
+        NSString *string = [NSString stringWithUTF8String:tm.description];
+        XCTAssertTrue(strcmp(tm.description, description) == 0, @"%@ != %@", expected, string);
+    }
+}
 
 - (void)verifyTminus:(Tminus)tm description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
     [self verifyTminus:tm finished:0 description:description days:days hours:hours minutes:minutes seconds:seconds];
