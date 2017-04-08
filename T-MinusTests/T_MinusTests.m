@@ -47,92 +47,92 @@
     Countdown_destroy(ctdn);
 }
 
-- (void)testFinalCountdown {
-    time_t now = time(NULL);
-    
-    Countdown* ctdn = Countdown_createWithTimestamp(self.conn, "Test countdown", now+10, NULL);
-    
-    Tminus tm = Countdown_tminus(ctdn);
-    
-    [self verifyTminus:tm description:"Ten..." seconds:10];
-    
-    Countdown_destroy(ctdn);
-}
-
-- (void)testGetMostUrgent {
-    time_t now = time(NULL);
-    
-    Countdown* ctdnNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Not so urgent countdown", now+9000, NULL);
-    Countdown_save(self.conn, ctdnNotSoUrgent);
-    Countdown* ctdnUrgent = Countdown_createWithTimestamp(self.conn, "Urgent countdown", now+10, NULL);
-    Countdown_save(self.conn, ctdnUrgent);
-    Countdown* ctdnOtherNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Other not so urgent countdown", now+5000, NULL);
-    Countdown_save(self.conn, ctdnOtherNotSoUrgent);
-    
-    Countdown *ctdn = Countdown_getMostUrgent(self.conn);
-    
-    XCTAssertEqual(ctdn->index, ctdnUrgent->index);
-    XCTAssertEqual(ctdn->deadline, ctdnUrgent->deadline);
-    XCTAssertTrue(strcmp(ctdn->title, ctdnUrgent->title) == 0, @"%s != %s", ctdn->title, ctdnUrgent->title);
-    
-    Countdown_destroy(ctdn);
-    Countdown_destroy(ctdnNotSoUrgent);
-    Countdown_destroy(ctdnUrgent);
-    Countdown_destroy(ctdnOtherNotSoUrgent);
-}
-
-- (void)testCreateCountdown {
-    int i;
-    Countdown *ctdns[MAX_ROWS];
-    
-    for (i = 0; i <= MAX_ROWS; i++) {
-        
-        Countdown *ctdn = Countdown_create(self.conn);
-        
-        if (i == MAX_ROWS) {
-            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
-            continue;
-        }
-
-        ctdn->deadline = time(NULL) + i+1;
-        Countdown_save(self.conn, ctdn);
-        
-        if (i > 0) {
-            Countdown* lastCtdn = ctdns[i-1];
-            
-            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
-        }
-        ctdns[i] = ctdn;
-    }
-    
-    for (i = 0; i < MAX_ROWS; i++) {
-        Countdown_destroy(ctdns[i]);
-    }
-}
-
-- (void)testCreateReuse {
-    int i;
-    
-    for (i = 0; i < 3; i++) {
-        Countdown *ctdn = Countdown_create(self.conn);
-        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
-        
-        Countdown_destroy(ctdn);
-    }
-}
-
-- (void)verifyTminus:(Tminus)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
-    XCTAssertEqual(finished, tm.finished, "Finished does not match expected");
-    XCTAssertEqual(days, tm.days, @"Days does not match expected");
-    XCTAssertEqual(hours, tm.hours, @"Hours does not match expected");
-    XCTAssertEqual(minutes, tm.minutes, @"Minutes does not match expected");
-    XCTAssertEqual(seconds, tm.seconds, @"Seconds does not match expected");
-    if (description) {
-        NSString *expected = [NSString stringWithUTF8String:description];
-        NSString *string = [NSString stringWithUTF8String:tm.description];
-        XCTAssertTrue(strcmp(tm.description, description) == 0, @"%@ != %@", expected, string);
-    }
-}
+//- (void)testFinalCountdown {
+//    time_t now = time(NULL);
+//    
+//    Countdown* ctdn = Countdown_createWithTimestamp(self.conn, "Test countdown", now+10, NULL);
+//    
+//    Tminus tm = Countdown_tminus(ctdn);
+//    
+//    [self verifyTminus:tm description:"Ten..." seconds:10];
+//    
+//    Countdown_destroy(ctdn);
+//}
+//
+//- (void)testGetMostUrgent {
+//    time_t now = time(NULL);
+//    
+//    Countdown* ctdnNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Not so urgent countdown", now+9000, NULL);
+//    Countdown_save(self.conn, ctdnNotSoUrgent);
+//    Countdown* ctdnUrgent = Countdown_createWithTimestamp(self.conn, "Urgent countdown", now+10, NULL);
+//    Countdown_save(self.conn, ctdnUrgent);
+//    Countdown* ctdnOtherNotSoUrgent = Countdown_createWithTimestamp(self.conn, "Other not so urgent countdown", now+5000, NULL);
+//    Countdown_save(self.conn, ctdnOtherNotSoUrgent);
+//    
+//    Countdown *ctdn = Countdown_getMostUrgent(self.conn);
+//    
+//    XCTAssertEqual(ctdn->index, ctdnUrgent->index);
+//    XCTAssertEqual(ctdn->deadline, ctdnUrgent->deadline);
+//    XCTAssertTrue(strcmp(ctdn->title, ctdnUrgent->title) == 0, @"%s != %s", ctdn->title, ctdnUrgent->title);
+//    
+//    Countdown_destroy(ctdn);
+//    Countdown_destroy(ctdnNotSoUrgent);
+//    Countdown_destroy(ctdnUrgent);
+//    Countdown_destroy(ctdnOtherNotSoUrgent);
+//}
+//
+//- (void)testCreateCountdown {
+//    int i;
+//    Countdown *ctdns[MAX_ROWS];
+//    
+//    for (i = 0; i <= MAX_ROWS; i++) {
+//        
+//        Countdown *ctdn = Countdown_create(self.conn);
+//        
+//        if (i == MAX_ROWS) {
+//            XCTAssertTrue(ctdn == NULL, @"Should not be able to create more than %d countdowns (returned %d)", MAX_ROWS, ctdn->index);
+//            continue;
+//        }
+//
+//        ctdn->deadline = time(NULL) + i+1;
+//        Countdown_save(self.conn, ctdn);
+//        
+//        if (i > 0) {
+//            Countdown* lastCtdn = ctdns[i-1];
+//            
+//            XCTAssertTrue(ctdn->index > lastCtdn->index, @"Countdown indices should be increasing (was %d now %d)", lastCtdn->index, 1);
+//        }
+//        ctdns[i] = ctdn;
+//    }
+//    
+//    for (i = 0; i < MAX_ROWS; i++) {
+//        Countdown_destroy(ctdns[i]);
+//    }
+//}
+//
+//- (void)testCreateReuse {
+//    int i;
+//    
+//    for (i = 0; i < 3; i++) {
+//        Countdown *ctdn = Countdown_create(self.conn);
+//        XCTAssertEqual(ctdn->index, 0, "Index should be 0 because no data saved");
+//        
+//        Countdown_destroy(ctdn);
+//    }
+//}
+//
+//- (void)verifyTminus:(Tminus)tm finished:(int)finished description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
+//    XCTAssertEqual(finished, tm.finished, "Finished does not match expected");
+//    XCTAssertEqual(days, tm.days, @"Days does not match expected");
+//    XCTAssertEqual(hours, tm.hours, @"Hours does not match expected");
+//    XCTAssertEqual(minutes, tm.minutes, @"Minutes does not match expected");
+//    XCTAssertEqual(seconds, tm.seconds, @"Seconds does not match expected");
+//    if (description) {
+//        NSString *expected = [NSString stringWithUTF8String:description];
+//        NSString *string = [NSString stringWithUTF8String:tm.description];
+//        XCTAssertTrue(strcmp(tm.description, description) == 0, @"%@ != %@", expected, string);
+//    }
+//}
 
 - (void)verifyTminus:(Tminus)tm description:(char *)description days:(int)days hours:(int)hours minutes:(int)minutes seconds:(int)seconds {
     [self verifyTminus:tm finished:0 description:description days:days hours:hours minutes:minutes seconds:seconds];
