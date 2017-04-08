@@ -5,7 +5,7 @@ xcode_scheme: 'T-Minus Debug'
 before_script:
     ./travis_setup_codesigning.sh
 script:
-    xcodebuild clean build test -scheme T-Minus\ Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    ./tests.sh 
 addons:
   code_climate:
     repo_token: 5b2c62ffaa4ce56bf517cfb95ecabe0f6e61326a2a926a7edfa62d8b5a5a6cd4
