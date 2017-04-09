@@ -19,20 +19,20 @@
 @implementation AppDelegate
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification {
-    self.windows = [NSMutableArray new];
-    
-    [self setupConnection];
-    
-    Countdown *savedCountdown = Countdown_get(self.connection);
-    while (savedCountdown) {
-        [self openCountdown:savedCountdown];
-        savedCountdown = Countdown_get(self.connection);
-    }
-    
-    // If there are no saved countdowns, create a new one
-    if (Countdown_count(self.connection) == 0) {
-        [self openCountdown:NULL];
-    }
+//    self.windows = [NSMutableArray new];
+//    
+//    [self setupConnection];
+//    
+//    Countdown *savedCountdown = Countdown_get(self.connection);
+//    while (savedCountdown) {
+//        [self openCountdown:savedCountdown];
+//        savedCountdown = Countdown_get(self.connection);
+//    }
+//    
+//    // If there are no saved countdowns, create a new one
+//    if (Countdown_count(self.connection) == 0) {
+//        [self openCountdown:NULL];
+//    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
